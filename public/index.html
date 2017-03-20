@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SKY FLIGHTS | BOOK CHEAP DIRECT FLIGHTS TO ANY DESTINATION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="datepicker/dist/datepicker.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script type="text/javascript" src="jquery.autocomplete.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="root"></div>
+        
+        <script>
+        $(function () {
+            $('#autocomplete').autocomplete({
+                serviceUrl: '/flights/airports'
+            });
+        });
+        </script>
+
+        <script src="datepicker/dist/datepicker.js"></script>
+        <script src="datepicker/dist/main.js"></script>
+        <script src="bundle.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,142 @@
+Sequelize [Node: 4.6.1, CLI: 2.4.0, ORM: 3.30.2]
+
+Usage
+  sequelize [task] [OPTIONS...]
+Available tasks
+  db:migrate             Run pending migrations.
+  db:migrate:old_schema  Update legacy migration table
+  db:migrate:undo        Revert the last migration run.
+  db:migrate:undo:all    Revert all migrations ran.
+  db:seed                Run specified seeder.
+  db:seed:all            Run every seeder.
+  db:seed:undo           Deletes data from the database.
+  db:seed:undo:all       Deletes data from the database.
+  help                   Display this help text. Aliases: h
+  init                   Initializes the project. [init:config, init:migrations, init:seeders, init:models]
+  init:config            Initializes the configuration.
+  init:migrations        Initializes the migrations.
+  init:models            Initializes the models.
+  init:seeders           Initializes the seeders.
+  migration:create       Generates a new migration file. Aliases: migration:generate
+  model:create           Generates a model and its migration. Aliases: model:generate
+  seed:create            Generates a new seed file. Aliases: seed:generate
+  version                Prints the version number. Aliases: v
+Available manuals
+  help:db:migrate             The documentation for "sequelize db:migrate".
+  help:db:migrate:old_schema  The documentation for "sequelize db:migrate:old_schema".
+  help:db:migrate:undo        The documentation for "sequelize db:migrate:undo".
+  help:db:migrate:undo:all    The documentation for "sequelize db:migrate:undo:all".
+  help:db:seed                The documentation for "sequelize db:seed".
+  help:db:seed:all            The documentation for "sequelize db:seed:all".
+  help:db:seed:undo           The documentation for "sequelize db:seed:undo".
+  help:db:seed:undo:all       The documentation for "sequelize db:seed:undo:all".
+  help:init                   The documentation for "sequelize init".
+  help:init:config            The documentation for "sequelize init:config".
+  help:init:migrations        The documentation for "sequelize init:migrations".
+  help:init:models            The documentation for "sequelize init:models".
+  help:init:seeders           The documentation for "sequelize init:seeders".
+  help:migration:create       The documentation for "sequelize migration:create".
+  help:model:create           The documentation for "sequelize model:create".
+  help:seed:create            The documentation for "sequelize seed:create".
+  help:version                The documentation for "sequelize version".
+
+Bro@TRILION MINGW64 /c/final-project (master)
+$ sequelize init
+
+Sequelize [Node: 4.6.1, CLI: 2.4.0, ORM: 3.30.2]
+
+Created "config\config.json"
+Successfully created migrations folder at "C:\final-project\migrations".
+Successfully created seeders folder at "C:\final-project\seeders".
+Successfully created models folder at "C:\final-project\models".
+Loaded configuration file "config\config.json".
+Using environment "development".
+
+Bro@TRILION MINGW64 /c/final-project (master)
+$ sequelize help:model:create
+
+Sequelize [Node: 4.6.1, CLI: 2.4.0, ORM: 3.30.2, pg: ^6.1.2]
+
+Loaded configuration file "config\config.json".
+Using environment "development".
+COMMANDS
+    sequelize model:create   -- Generates a model and its migration.
+    sequelize model:generate -- Generates a model and its migration.
+DESCRIPTION
+    This task generates a model file and its respective migration.
+    It is necessary to specify the name of the new model as well as
+    the model's attributes.
+
+    The attributes can be specified as in the following (and semantically equal) examples:
+
+    sequelize model:create --name User --attributes first_name:string,last_name:string,bio:text
+    sequelize model:create --name User --attributes 'first_name:string last_name:string bio:text'
+    sequelize model:create --name User --attributes 'first_name:string, last_name:string, bio:text'
+
+    This command will generate a new migration and model definition:
+
+    // the model file
+    // located under models/user.js
+    'use strict';
+    module.exports = function(sequelize, DataTypes) {
+      var User = sequelize.define('User', {
+        first_name: DataTypes.STRING,
+        last_name: DataTypes.STRING,
+        bio: DataTypes.TEXT
+      }, {
+        classMethods: {
+          associate: function(models) {
+            // associations can be defined here
+          }
+        }
+      });
+      return User;
+    };
+
+    // the migration file
+    // located under migrations/20170303050345-create-user.js
+    'use strict';
+    module.exports = {
+      up: function(queryInterface, Sequelize) {
+        return queryInterface.createTable('Users', {
+          id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.INTEGER
+          },
+          first_name: {
+            type: Sequelize.STRING
+          },
+          last_name: {
+            type: Sequelize.STRING
+          },
+          bio: {
+            type: Sequelize.TEXT
+          },
+          createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          },
+          updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+          }
+        });
+      },
+      down: function(queryInterface, Sequelize) {
+        return queryInterface.dropTable('Users');
+      }
+    };
+OPTIONS
+    --env              The environment to run the command in. Default: development
+    --coffee           Enables coffee script support. Default: false
+    --config           The path to the config file. Default: config/config.json
+    --options-path     The path to a JSON file with additional options. Default: none
+    --migrations-path  The path to the migrations folder. Default: migrations
+    --seeders-path     The path to the seeders folder. Default: seeders
+    --models-path      The path to the models folder.Default: models
+    --url              The database connection string to use. Alternative to using --config files. Default: none
+    --name             The name of the new model.
+    --attributes       A list of attributes.
+    --underscored      Set timestamps to snake_case
