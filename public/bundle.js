@@ -44418,13 +44418,37 @@
 	
 		_createClass(Airports, [{
 			key: 'handleSubmit',
-			value: function handleSubmit(event) {
-				var _this2 = this;
 	
+			// handleName(event){
+			// 	let target= event.target;
+			// 	let name=target.value;
+			// 	this.setState({
+			// 		n
+			// 	})
+			// }
+			// handleIata(event){
+	
+			// }
+			// handleLongitude(event){
+	
+			// }
+			// handleLatitude(event){
+	
+			// }
+			// handleContinent(event){
+	
+			// }
+	
+			value: function handleSubmit(event) {
 				event.preventDefault();
-				axios.post('/flights/search', this.state).then(function (response) {
-					_this2.props.setQueryResults(response.data);
-				});
+				var target = event.target;
+				var name = target.value;
+				//console.log(airport);
+	
+				// axios.post('/flights/search', this.state)
+				// 		.then((response) => {
+				// 			this.props.setQueryResults(response.data);
+				// });
 			}
 		}, {
 			key: 'render',
@@ -44452,31 +44476,31 @@
 									{ htmlFor: 'depart' },
 									'Airport Name:'
 								),
-								_react2.default.createElement('input', { type: 'text', placeholder: 'Airport Name' }),
+								_react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Airport Name' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'iata' },
 									'IATA Code'
 								),
-								_react2.default.createElement('input', { type: 'text', placeholder: 'IATA Code' }),
+								_react2.default.createElement('input', { type: 'text', name: 'iata', placeholder: 'IATA Code' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
 									'Longitude'
 								),
-								_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'longitude' }),
+								_react2.default.createElement('input', { type: 'text', name: 'longitude', className: 'input-text', placeholder: 'longitude' }),
 								_react2.default.createElement(
 									'label',
-									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
+									{ htmlFor: 'latitude', className: 'spacer responsive-label' },
 									'Latitude'
 								),
-								_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'latitude' }),
+								_react2.default.createElement('input', { type: 'text', name: 'latitude', className: 'input-text', placeholder: 'latitude' }),
 								_react2.default.createElement(
 									'label',
-									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
+									{ htmlFor: 'continent', className: 'spacer responsive-label' },
 									'Continent'
 								),
-								_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'Continent' }),
+								_react2.default.createElement('input', { type: 'text', name: 'continent', className: 'input-text', placeholder: 'Continent' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'submit', className: 'responsive-label' },
