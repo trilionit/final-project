@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const Index = require('./routes/index');
-
+const dbPosts = require('./routes/dbPosts');
 //use the public folder as the static directory. 
 app.use( express.static(path.join(__dirname, 'public')));
 
