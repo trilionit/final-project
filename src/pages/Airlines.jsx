@@ -9,13 +9,32 @@ import ResultContainer from '../components/ResultContainer/ResultContainer.jsx';
 require('../css/style.css');
 
 class Airlines extends Component{
-	
+	handleSubmit(event){
+		event.preventDefault();
+		axios.post('/flights/search', this.state)
+  		.then((response) => {
+  			this.props.setQueryResults(response.data);
+		});
+	}
 	render(){
 			
 			return(
-				<div>
-				<h1>Airlines</h1>	
+			<div className="search-container">
+				<div className="search-form">
+				<h3>Add Airlines</h3>
+				<form id="flight-Info" onSubmit={this.handleSubmit.bind(this)}>
+					<div className="form-elements">
+						<label htmlFor="depart">Airline Name:</label>
+							<input type="text" placeholder="Airline Name" />
+						<label htmlFor="img">IMG URL</label>
+						  <input type="text" placeholder="IMG URL" />
+						<label htmlFor="submit" className="responsive-label">
+					      <input type="submit" className="submit" name="" value="Add" />
+						</label>
+					</div>
+				</form>
 				</div>
+			</div>
 			);
 	}
 	

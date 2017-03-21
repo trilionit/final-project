@@ -20,10 +20,9 @@ class Airports extends Component{
 	render(){
 			
 			return(
-				<div>
-				<div className="search-container">
+			<div className="search-container">
 				<div className="search-form">
-					<h3>Add Airports</h3>
+				<h3>Add Airports</h3>
 				<form id="flight-Info" onSubmit={this.handleSubmit.bind(this)}>
 					<div className="form-elements">
 						<label htmlFor="depart">Airport Name:</label>
@@ -37,12 +36,11 @@ class Airports extends Component{
 						<label htmlFor="longitude" className="spacer responsive-label">Continent</label>
 							<input type="text" className="input-text" placeholder="Continent" />
 						<label htmlFor="submit" className="responsive-label">
-					      <input type="submit" className="submit" name="" value="Search" />
+					      <input type="submit" className="submit" name="" value="Add" />
 						</label>
 					</div>
 				</form>
 				</div>
-			</div>
 			</div>
 			);
 	}

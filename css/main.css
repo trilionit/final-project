@@ -2,11 +2,14 @@ body{
 	margin: 0;
 	padding: 0;
 	font-family: 'Open Sans', sans-serif;
-	background: ;
-	font-size: 16px;
+	font-size: 0.9em;
+	font-weight: 200;
+	background: #FFF url('http://localhost:3000/images/airport.jpg') no-repeat center fixed;
+	height: auto;
 }
+
 .style__top___3c1if{
-	background:url('http://localhost:3030/images/media.jpg') no-repeat center center fixed;
+	background:url('http://localhost:3000/images/media.jpg') no-repeat center fixed;
 	width: 100%;
 	height: 600px;
 	-webkit-background-size: cover;
@@ -15,7 +18,7 @@ body{
     background-size: cover;
 }
 header{
-	with:100%;
+	width:100%;
 	height: 80px;
 	background:#FFF;
 }
@@ -60,16 +63,20 @@ nav ul li a, nav ul li a:hover{
 }
 .style__search-container___27gPx{
 	width:80%;
-	background:#000;
-	padding:10px;
-	margin:15% auto 40px auto;
+	height: auto;
+	display:inline-block;
+	background: rgb(38, 1, 38);
+	background: rgba(38, 1, 38, 0.6);
+	padding:30px;
+	margin:10% 8% 30px 8%;
 }
 .style__search-form___1hmKy{
-	float: left;
-	width:100%;
+	float:left;
+	width:96%;
 	padding:20px;
 	background: #FFF;
 }
+
 .style__form-elements___1EZdv{
 	float: left;
 	width:100%;
@@ -89,6 +96,15 @@ nav ul li a, nav ul li a:hover{
 	margin:10px 20px 10px 0;
 
 }
+.style__input-text___3Ckpn{
+	border:1px solid #E3E3E3;
+	color: #898989;
+	width: 8%;
+	padding: 10px;
+	margin:10px 20px 10px 0;
+
+}
+
 .style__form-elements___1EZdv select{
 	padding: 10px;
 	border:1px solid #E3E3E3;
@@ -106,53 +122,138 @@ nav ul li a, nav ul li a:hover{
 	border:none;
 }
 .style__search-results___34gQp{
-	display: block;
 	width:80%;
-	margin:0 auto;
+	margin:100px auto 0 auto;
 	padding: 20px;
+	font-weight: 300;
+}
+.style__search-background-container___3y85C{
+	float: left;
+	width: 100%;
+	background: rgb(38, 1, 38);
+	background: rgba(38, 1, 38, 0.6);
+	padding: 10px;
 }
 .style__results-container___j2Xcb{
 	width:80%;
-	display:block;
 	margin:20px auto;
 	padding: 0;
 }
+.style__title-container___2LfGN{
+	float: left;
+	width: 100%;
+}
 .style__search-header___3qOLH{
 	float:left;
-	margin: 100px 0 0 0;
+	width: auto;
+	text-align: left;
+	margin:0 20px 0 0;
 }
 .style__search-header___3qOLH h3{
 	font-weight: normal;
 	font-size: 1.2em;
-	padding: 60px 0 0 0;
-	color:#666;
+	padding: 0;
+	margin: 0;
+	color:#BCBCBC;
 }
 .style__search-title___rhFlZ{
 	float: left;
-	display: block;
+	width:auto;
 	font-size: 1.2em;
-	color:#333;
-	padding: 20px 0;
+	color:#F4F4F4;
+	margin:0;
+	padding:0;
 }
-.style__results-container___j2Xcb span{
-	display: inline-block;
-	padding: 20px;
+.style__span-contain___3lTMz{
+	display: block;
+	text-align:left;
+	padding: 0 10px 0 0;
+}
+.style__span-color___1qzFP{
+	color:#BCBCBC;
 }
 .style__result-element___3hrFZ{
+	float:left;
+	width:100%;
+	padding:10px;
+	margin:20px 0 0 0;
+}
+.style__result-left___2NIn6{
 	float: left;
-	width: 90%;
-	padding: 10px;
-	margin: 20px 0 0 0;
+	width: 25%;
+}
+.style__stops-container___8rUMJ{
+	float: left;
+	width:80%;
+	margin: 0 30px 0 40px;
+}
+.style__stops-container___8rUMJ h3{
+	font-weight:300;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+.style__stops-container___8rUMJ ul{
+	margin:0;
+	padding:0 0 20px 0;
+}
+.style__stops-container___8rUMJ li{
+	display: block;
+	font-size: 11px;
+	color:#F4F4F4;
+	list-style: none;
+	padding: 0 0 5px 0;
+	margin: 0;
+}
+.style__stops-container___8rUMJ li span.style__span-right___D5H2E{
+	float: right;
+	text-align: left;
+}
+.style__airlines-container___2icGP{
+	float: left;
+	width:80%;
+	margin: 20px 30px 0 40px;
+}
+
+.style__airlines-container___2icGP h3{
+	font-weight:300;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+.style__airlines-container___2icGP ul{
+	margin:0;
+	padding:0 0 20px 0;
+}
+.style__airlines-container___2icGP li{
+	display: block;
+	font-size: 11px;
+	color:#F4F4F4;
+	list-style: none;
+	padding: 0 0 5px 0;
+	margin: 0;
+}
+.style__airlines-container___2icGP li span.style__span-right___D5H2E{
+	float: right;
+	text-align: left;
+}
+
+.style__result-right___3_a1B{
+	float: left;
+	width: 70%;
+	margin-left: 40px;
 }
 .style__show-results___3tHPX{
 	float: left;
-	width: 100%;
-	background:#F4F4F4;
-	margin: 0 0 20px 0;
+	width: 90%;
+	background:#FFFFFF;
+	border:1px solid #f4f4f4;
+	margin: 0 0 5px 0;
 }
 .style__result-logo___17VUf{
 	float: left;
 	width: 100px;
+	padding:10px 0 0 10px;
 	margin: 0 20px 0 0;
 }
 .style__mid-element___NU5e7{
@@ -199,19 +300,15 @@ nav ul li a, nav ul li a:hover{
 	font-size:11px;
 	border:none;
 }
-.style__mid-contain-strip___mOSw4{
-	float: left;
-	width: 100%;
-	margin: 0;
-	height: 10px;
-	background:#260126;
-}
+
 footer{
 	float: left; 
 	width: 100%;
-	margin: 0;
+	text-align: center;
+	margin: 2% 0 0 0;
 	padding: 30px 0;
 	height: 50px;
+	border-top:10px solid #260126;
 	background:#E6E6E6;
 }
 .style__footer___3-RVa{
@@ -219,5 +316,529 @@ footer{
 	font-size:12px;
 	margin:20px auto;
 }
+@media only screen and (min-width : 280px) and (max-width : 562px){
+	.style__top___3c1if{
+		height: auto;
+	}
+	header{
+		height: 200px;
+	}
+	.style__top-wrap___1aMPM{
+		width: 100%;
+		margin: 0 auto;
+		padding: 0;
+	}
+	.style__logo___3yim3{
+		float: left;
+		text-align: center;
+		width: 80%;
+		margin:10px 0 0 0;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	.style__top-nav___2fT-A{
+		float: left;
+		width: 100%;
+		margin: 10px 0;
+		padding: 0;
+		background: #EBEBEB;
+		box-sizing: border-box;
+	}
+	nav{
+		float: left;
+		margin:0 0 0 10px;
+	}
+
+	nav ul li{
+		padding: 8px 10px 8px 20px;
+		color: #982395;
+		display: block;
+	}
+
+	.style__search-container___27gPx{
+		background:url('http://localhost:3000/images/media.jpg') no-repeat center center fixed;
+		width:85%;
+		height: auto;
+		-webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+		float: left;
+		padding:8px;
+		margin:10px auto 10px 10px;
+	}
+	.style__search-form___1hmKy{
+		width:auto;
+		margin: 0 auto;
+		padding:20px;
+		background: rgb(38, 1, 38);
+		background: rgba(38, 1, 38, 0.6);
+	}
+
+	.style__form-elements___1EZdv label{
+		width:100%;
+		display: none;
+		margin: 10px 0 0 0;
+		color:#FFF;
+	}
+	.style__form-elements___1EZdv label.style__responsive-label___tCfLt{
+		display: block;
+	}
+	.style__form-elements___1EZdv input[type=text]{
+		border:1px solid #E3E3E3;
+		color: #898989;
+		width: 90%;
+		padding: 10px;
+		margin:10px 0 10px 0;
+	}
+
+	.style__form-elements___1EZdv select{
+		width:100%;
+		padding: 10px;
+		border:1px solid #E3E3E3;
+		color: #898989;
+		margin:10px 0;
+	}
+	.style__form-elements___1EZdv .style__spacer___3xOLy{
+		display: none;
+		visibility:0;
+	}
+	.style__form-elements___1EZdv label .style__submit___AaU-t{
+		width: 100%;
+		background: #EB65A0;
+		color: #FFF;
+		padding: 10px 15px;
+		border:none;
+	}
+
+	.style__search-results___34gQp{
+		width:95%;
+		margin:0 auto;
+		padding: 20px;
+	}
+	.style__search-background-container___3y85C{
+		width: 87.5%;
+		background: rgb(38, 1, 38);
+		background: rgba(38, 1, 38, 0.6);
+		padding: 10px;
+		margin:0 0 0 -10px;
+	}
+
+	.style__results-container___j2Xcb{
+		width:95%;
+		margin:20px auto;
+		padding: 0;
+	}
+	.style__search-header___3qOLH{
+		width: 100%;
+		text-align: center;
+		margin:0 0 20px 0;
+	}
+	.style__search-header___3qOLH h3 {
+	    font-weight: normal;
+	    font-size: 0.9em;
+	    padding: 0;
+	    margin: 0;
+	    text-align: center;
+	    color: #BCBCBC;
+	}
+	.style__span-contain___3lTMz{
+		display: block;
+		text-align:center;
+		padding: 0 10px 0 0;
+		font-size:11px;
+	}
+
+	.style__result-left___2NIn6{
+		float: left;
+		width: 90%;
+		margin:0;
+	}
+	.style__stops-container___8rUMJ{
+		float: left;
+		width:100%;
+		margin: 0 30px 0 0;
+	}
+
+	.style__stops-container___8rUMJ li{
+		display: block;
+		font-size: 11px;
+		color:#F4F4F4;
+		list-style: none;
+		padding: 0 0 5px 0;
+		margin: 0;
+	}
+	.style__stops-container___8rUMJ li span.style__span-right___D5H2E{
+		float: right;
+		text-align: left;
+	}
+
+	.style__airlines-container___2icGP{
+		float: left;
+		width:100%;
+		margin: 0 30px 0 0;
+	}
+
+	.style__airlines-container___2icGP h3{
+		font-weight:300;
+		font-size: 14px;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.style__result-right___3_a1B{
+		float: left;
+		width: 90%;
+		margin:0;
+	}
+	.style__show-results___3tHPX{
+		float: left;
+		width: 100%;
+		background:#FFFFFF;
+		border:1px solid #f4f4f4;
+		margin: 0 0 5px 0;
+	}
+	.style__result-logo___17VUf{
+		float: left;
+		width:100%;
+		text-align: center;
+		padding:0;
+		margin: 0;
+	}
+	.style__mid-element___NU5e7{
+		display: block;
+		width: 90%;
+		text-align:center;
+		margin: 0;
+		padding: 0;
+	}
+	.style__mid-element___NU5e7 h3{
+		font-weight: 300;
+		color:#333;
+		padding:0;
+		margin: 0;
+		font-size: 1em;
+	}
+	.style__mid-element___NU5e7 span{
+		margin: 0;
+		padding:0;
+		text-align: center;
+		font-size: 11px;
+		color:#555;
+	}
+	.style__result-price___vwHSN{
+		display: block;
+		width: 100%;
+		text-align: center;
+		margin:0;
+		padding:5px 0;
+		color:#982395;
+		font-size: 1.3em;
+		font-weight:400;
+	}
+	.style__result-detail___3Eg1e{
+		display: block;
+		margin:5px 0 40px 0;
+		padding: 20px 0 0 0;
+	}
+	.style__result-detail-btn___3hBFH{
+		padding: 8px 10px;
+		margin: 0 20px;
+		background: #9B539C;
+		color:#FFF;
+		font-size:11px;
+		border:none;
+	}
+	.style__result-detail-book___2f6vm{
+		padding: 8px 10px;
+		background: #9B539C;
+		color:#FFF;
+		font-size:11px;
+		border:none;
+	}
+
+	footer{
+		float: left; 
+		width: 100%;
+		text-align: center;
+		margin: 2% 0 0 0;
+		padding: 10px 0;
+		height:auto;
+		border-top:10px solid #260126;
+		background:#E6E6E6;
+	}
+	.style__footer___3-RVa{
+		width: 80%;
+		font-size:12px;
+		color:#7B7B7B;
+		margin:10px auto;
+	}
+
+	
+}
+@media only screen and (min-width : 562px) and (max-width : 780px){
+	.style__top___3c1if{
+		width: 100%;
+		height:auto;
+	}
+	header{
+		height: auto;
+	}
+	.style__top-wrap___1aMPM{
+		width: 100%;
+		margin: 0 auto;
+		padding: 0;
+	}
+	.style__logo___3yim3{
+		float: left;
+		text-align: center;
+		width: 80%;
+		margin:10px 0 0 0;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	.style__top-nav___2fT-A{
+		float: left;
+		width: 100%;
+		margin: 10px 0;
+		padding: 0;
+		background: #EBEBEB;
+		box-sizing: border-box;
+	}
+	nav{
+		float: left;
+		margin:0 0 0 10px;
+	}
+
+	nav ul li{
+		padding: 8px 10px 8px 20px;
+		color: #982395;
+		display: block;
+	}
+
+	.style__search-container___27gPx{
+		background:url('http://localhost:3000/images/media.jpg') no-repeat center center fixed;
+		width:85%;
+		height: auto;
+		-webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+		float: left;
+		padding:8px;
+		margin:10px auto 10px 10px;
+	}
+	.style__search-form___1hmKy{
+		width:93%;
+		margin: 0 auto;
+		padding:20px;
+		background: rgb(38, 1, 38);
+		background: rgba(38, 1, 38, 0.6);
+	}
+
+	.style__form-elements___1EZdv label{
+		width:100%;
+		display: none;
+		margin: 10px 0 0 0;
+		color:#FFF;
+	}
+	.style__form-elements___1EZdv label.style__responsive-label___tCfLt{
+		display: block;
+	}
+	.style__form-elements___1EZdv input[type=text]{
+		border:1px solid #E3E3E3;
+		color: #898989;
+		width: 90%;
+		padding: 10px;
+		margin:10px 0 10px 0;
+	}
+
+	.style__form-elements___1EZdv select{
+		width:94%;
+		padding: 10px;
+		border:1px solid #E3E3E3;
+		color: #898989;
+		margin:10px 0;
+	}
+	.style__form-elements___1EZdv .style__spacer___3xOLy{
+		display: none;
+		visibility:0;
+	}
+	.style__form-elements___1EZdv label .style__submit___AaU-t{
+		width: 94%;
+		background: #EB65A0;
+		color: #FFF;
+		padding: 10px 15px;
+		border:none;
+	}
+
+	.style__search-results___34gQp{
+		width:95%;
+		margin:0 auto;
+		padding: 20px;
+	}
+	.style__search-background-container___3y85C{
+		width: 87.5%;
+		background: rgb(38, 1, 38);
+		background: rgba(38, 1, 38, 0.6);
+		padding: 10px;
+		margin:0 0 0 -10px;
+	}
+
+	.style__results-container___j2Xcb{
+		width:95%;
+		margin:20px auto;
+		padding: 0;
+	}
+	.style__search-header___3qOLH{
+		width: 100%;
+		text-align: center;
+		margin:0 0 20px 0;
+	}
+	.style__search-header___3qOLH h3 {
+	    font-weight: normal;
+	    font-size: 0.9em;
+	    padding: 0;
+	    margin: 0;
+	    text-align: center;
+	    color: #BCBCBC;
+	}
+	.style__span-contain___3lTMz{
+		display: block;
+		text-align:center;
+		padding: 0 10px 0 0;
+		font-size:11px;
+	}
+
+	.style__result-left___2NIn6{
+		float: left;
+		width: 90%;
+		margin:0;
+	}
+	.style__stops-container___8rUMJ{
+		float: left;
+		width:100%;
+		margin: 0 30px 0 0;
+	}
+
+	.style__stops-container___8rUMJ li{
+		display: block;
+		font-size: 11px;
+		color:#F4F4F4;
+		list-style: none;
+		padding: 0 0 5px 0;
+		margin: 0;
+	}
+	.style__stops-container___8rUMJ li span.style__span-right___D5H2E{
+		float: right;
+		text-align: left;
+	}
+
+	.style__airlines-container___2icGP{
+		float: left;
+		width:100%;
+		margin: 0 30px 0 0;
+	}
+
+	.style__airlines-container___2icGP h3{
+		font-weight:300;
+		font-size: 14px;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.style__result-right___3_a1B{
+		float: left;
+		width: 90%;
+		margin:0;
+	}
+	.style__show-results___3tHPX{
+		text-align: center;
+		float: left;
+		width: 100%;
+		background:#FFFFFF;
+		border:1px solid #f4f4f4;
+		margin: 0 0 5px 0;
+	}
+	.style__result-logo___17VUf{
+		float: left;
+		width:100%;
+		padding:10px 0 0 0;
+		margin: 0;
+	}
+	.style__mid-element___NU5e7{
+		display: block;
+		width: 100%;
+		text-align:center;
+		margin: 0;
+		padding: 0;
+	}
+	.style__mid-element___NU5e7 h3{
+		font-weight: 300;
+		color:#333;
+		padding:0;
+		margin: 0;
+		font-size: 1em;
+	}
+	.style__mid-element___NU5e7 span{
+		margin: 0;
+		padding:0;
+		text-align: center;
+		font-size: 11px;
+		color:#555;
+	}
+	.style__result-price___vwHSN{
+		display: block;
+		width: 100%;
+		text-align: center;
+		margin:0;
+		padding:5px 0;
+		color:#982395;
+		font-size: 1.3em;
+		font-weight:400;
+	}
+	.style__result-detail___3Eg1e{
+		display: block;
+		margin:5px 0 40px 0;
+		padding: 20px 0 0 0;
+	}
+	.style__result-detail-btn___3hBFH{
+		padding: 8px 10px;
+		margin: 0 20px;
+		background: #9B539C;
+		color:#FFF;
+		font-size:11px;
+		border:none;
+	}
+	.style__result-detail-book___2f6vm{
+		padding: 8px 10px;
+		background: #9B539C;
+		color:#FFF;
+		font-size:11px;
+		border:none;
+	}
+
+	footer{
+		float: left; 
+		width: 100%;
+		text-align: center;
+		margin: 2% 0 0 0;
+		padding: 10px 0;
+		height:auto;
+		border-top:10px solid #260126;
+		background:#E6E6E6;
+	}
+	.style__footer___3-RVa{
+		width: 80%;
+		font-size:12px;
+		color:#7B7B7B;
+		margin:10px auto;
+	}
+
+	
+}
+
 
 /*# sourceMappingURL=main.css.map*/

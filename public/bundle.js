@@ -59,7 +59,7 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 159);
 	
-	var _Airlines = __webpack_require__(/*! ./pages/Airlines.jsx */ 371);
+	var _Airlines = __webpack_require__(/*! ./pages/Airlines.jsx */ 222);
 	
 	var _Airlines2 = _interopRequireDefault(_Airlines);
 	
@@ -67,7 +67,7 @@
 	
 	var _Airports2 = _interopRequireDefault(_Airports);
 	
-	var _App = __webpack_require__(/*! ./App.jsx */ 222);
+	var _App = __webpack_require__(/*! ./App.jsx */ 371);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -26116,9 +26116,9 @@
 
 /***/ },
 /* 222 */
-/*!*********************!*\
-  !*** ./src/App.jsx ***!
-  \*********************/
+/*!********************************!*\
+  !*** ./src/pages/Airlines.jsx ***!
+  \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26133,11 +26133,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Form = __webpack_require__(/*! ./components/form-component/Form.jsx */ 224);
+	var _Footer = __webpack_require__(/*! ../components/footer/Footer.jsx */ 223);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	var _Form = __webpack_require__(/*! ../components/form-component/Form.jsx */ 224);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _ResultContainer = __webpack_require__(/*! ./components/ResultContainer/ResultContainer.jsx */ 366);
+	var _Header = __webpack_require__(/*! ../components/header/Header.jsx */ 363);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _ResultContainer = __webpack_require__(/*! ../components/ResultContainer/ResultContainer.jsx */ 366);
 	
 	var _ResultContainer2 = _interopRequireDefault(_ResultContainer);
 	
@@ -26149,94 +26157,76 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var App = function (_Component) {
-		_inherits(App, _Component);
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
-		function App(props) {
-			_classCallCheck(this, App);
+	var Airlines = function (_Component) {
+		_inherits(Airlines, _Component);
 	
-			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+		function Airlines() {
+			_classCallCheck(this, Airlines);
 	
-			_this.state = {
-				flightData: {}
-			};
-	
-			return _this;
+			return _possibleConstructorReturn(this, (Airlines.__proto__ || Object.getPrototypeOf(Airlines)).apply(this, arguments));
 		}
 	
-		_createClass(App, [{
-			key: 'setQueryResults',
-			value: function setQueryResults(flightData) {
-				if (!flightData) console.log("it don't exist");
-				this.setState({
-					flightData: flightData
+		_createClass(Airlines, [{
+			key: 'handleSubmit',
+			value: function handleSubmit(event) {
+				var _this2 = this;
+	
+				event.preventDefault();
+				axios.post('/flights/search', this.state).then(function (response) {
+					_this2.props.setQueryResults(response.data);
 				});
-				this.setState({
-					searchResults: true,
-					UndoStateChange: flightData
-				});
-			}
-		}, {
-			key: 'setStopsFilter',
-			value: function setStopsFilter(data) {
-				console.log(data.filter);
-				if (data.filter == true) {
-					this.setState({
-						flightData: data.flights
-					});
-				} else {
-					this.setState({
-						flightData: this.state.UndoStateChange
-					});
-				}
-			}
-		}, {
-			key: 'setAirlineFilter',
-			value: function setAirlineFilter(data) {
-				console.log("Data Filter: ", data.filter);
-				if (data.filter == true) {
-					this.setState({
-						flightData: data.flights
-					});
-				} else if (data.filter == false) {
-					this.setState({
-						flightData: this.state.UndoStateChange
-					});
-				}
 			}
 		}, {
 			key: 'render',
 			value: function render() {
 	
-				// // console.log(this.state.flightData);
-				// // console.log(this.state.userSearch);
-				//let renderApp;
-				if (this.state.searchResults == true) {
-	
-					return _react2.default.createElement(
+				return _react2.default.createElement(
+					'div',
+					{ className: 'search-container' },
+					_react2.default.createElement(
 						'div',
-						null,
-						_react2.default.createElement(_Form2.default, {
-							setQueryResults: this.setQueryResults.bind(this)
-						}),
-						_react2.default.createElement(_ResultContainer2.default, {
-							flightData: this.state.flightData,
-							setStopsFilter: this.setStopsFilter.bind(this),
-							setAirlineFilter: this.setAirlineFilter.bind(this)
-						})
-					);
-				} else {
-					return _react2.default.createElement(_Form2.default, {
-						setQueryResults: this.setQueryResults.bind(this)
-					});
-				}
+						{ className: 'search-form' },
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Add Airlines'
+						),
+						_react2.default.createElement(
+							'form',
+							{ id: 'flight-Info', onSubmit: this.handleSubmit.bind(this) },
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-elements' },
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'depart' },
+									'Airline Name:'
+								),
+								_react2.default.createElement('input', { type: 'text', placeholder: 'Airline Name' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'img' },
+									'IMG URL'
+								),
+								_react2.default.createElement('input', { type: 'text', placeholder: 'IMG URL' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'submit', className: 'responsive-label' },
+									_react2.default.createElement('input', { type: 'submit', className: 'submit', name: '', value: 'Add' })
+								)
+							)
+						)
+					)
+				);
 			}
 		}]);
 	
-		return App;
+		return Airlines;
 	}(_react.Component);
 	
-	exports.default = App;
+	exports.default = Airlines;
 
 /***/ },
 /* 223 */
@@ -44376,7 +44366,16 @@
 	exports.default = SearchFilter;
 
 /***/ },
-/* 369 */,
+/* 369 */
+/*!***************************!*\
+  !*** ./src/css/style.css ***!
+  \***************************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"top":"style__top___3c1if","top-wrap":"style__top-wrap___1aMPM","logo":"style__logo___3yim3","top-nav":"style__top-nav___2fT-A","search-container":"style__search-container___27gPx","search-form":"style__search-form___1hmKy","form-elements":"style__form-elements___1EZdv","input-text":"style__input-text___3Ckpn","spacer":"style__spacer___3xOLy","submit":"style__submit___AaU-t","search-results":"style__search-results___34gQp","search-background-container":"style__search-background-container___3y85C","results-container":"style__results-container___j2Xcb","title-container":"style__title-container___2LfGN","search-header":"style__search-header___3qOLH","search-title":"style__search-title___rhFlZ","span-contain":"style__span-contain___3lTMz","span-color":"style__span-color___1qzFP","result-element":"style__result-element___3hrFZ","result-left":"style__result-left___2NIn6","stops-container":"style__stops-container___8rUMJ","span-right":"style__span-right___D5H2E","airlines-container":"style__airlines-container___2icGP","result-right":"style__result-right___3_a1B","show-results":"style__show-results___3tHPX","result-logo":"style__result-logo___17VUf","mid-element":"style__mid-element___NU5e7","result-price":"style__result-price___vwHSN","result-detail":"style__result-detail___3Eg1e","result-detail-btn":"style__result-detail-btn___3hBFH","result-detail-book":"style__result-detail-book___2f6vm","footer":"style__footer___3-RVa","responsive-label":"style__responsive-label___tCfLt"};
+
+/***/ },
 /* 370 */
 /*!********************************!*\
   !*** ./src/pages/Airports.jsx ***!
@@ -44415,7 +44414,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Airports = function (_Component) {
 		_inherits(Airports, _Component);
@@ -44442,59 +44441,55 @@
 	
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'search-container' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'search-container' },
+						{ className: 'search-form' },
 						_react2.default.createElement(
-							'div',
-							{ className: 'search-form' },
+							'h3',
+							null,
+							'Add Airports'
+						),
+						_react2.default.createElement(
+							'form',
+							{ id: 'flight-Info', onSubmit: this.handleSubmit.bind(this) },
 							_react2.default.createElement(
-								'h3',
-								null,
-								'Add Airports'
-							),
-							_react2.default.createElement(
-								'form',
-								{ id: 'flight-Info', onSubmit: this.handleSubmit.bind(this) },
+								'div',
+								{ className: 'form-elements' },
 								_react2.default.createElement(
-									'div',
-									{ className: 'form-elements' },
-									_react2.default.createElement(
-										'label',
-										{ htmlFor: 'depart' },
-										'Airport Name:'
-									),
-									_react2.default.createElement('input', { type: 'text', placeholder: 'Airport Name' }),
-									_react2.default.createElement(
-										'label',
-										{ htmlFor: 'iata' },
-										'IATA Code'
-									),
-									_react2.default.createElement('input', { type: 'text', placeholder: 'IATA Code' }),
-									_react2.default.createElement(
-										'label',
-										{ htmlFor: 'longitude', className: 'spacer responsive-label' },
-										'Longitude'
-									),
-									_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'longitude' }),
-									_react2.default.createElement(
-										'label',
-										{ htmlFor: 'longitude', className: 'spacer responsive-label' },
-										'Latitude'
-									),
-									_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'latitude' }),
-									_react2.default.createElement(
-										'label',
-										{ htmlFor: 'longitude', className: 'spacer responsive-label' },
-										'Continent'
-									),
-									_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'Continent' }),
-									_react2.default.createElement(
-										'label',
-										{ htmlFor: 'submit', className: 'responsive-label' },
-										_react2.default.createElement('input', { type: 'submit', className: 'submit', name: '', value: 'Search' })
-									)
+									'label',
+									{ htmlFor: 'depart' },
+									'Airport Name:'
+								),
+								_react2.default.createElement('input', { type: 'text', placeholder: 'Airport Name' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'iata' },
+									'IATA Code'
+								),
+								_react2.default.createElement('input', { type: 'text', placeholder: 'IATA Code' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
+									'Longitude'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'longitude' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
+									'Latitude'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'latitude' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
+									'Continent'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'input-text', placeholder: 'Continent' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'submit', className: 'responsive-label' },
+									_react2.default.createElement('input', { type: 'submit', className: 'submit', name: '', value: 'Add' })
 								)
 							)
 						)
@@ -44510,9 +44505,9 @@
 
 /***/ },
 /* 371 */
-/*!********************************!*\
-  !*** ./src/pages/Airlines.jsx ***!
-  \********************************/
+/*!*********************!*\
+  !*** ./src/App.jsx ***!
+  \*********************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44527,19 +44522,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Footer = __webpack_require__(/*! ../components/footer/Footer.jsx */ 223);
-	
-	var _Footer2 = _interopRequireDefault(_Footer);
-	
-	var _Form = __webpack_require__(/*! ../components/form-component/Form.jsx */ 224);
+	var _Form = __webpack_require__(/*! ./components/form-component/Form.jsx */ 224);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _Header = __webpack_require__(/*! ../components/header/Header.jsx */ 363);
-	
-	var _Header2 = _interopRequireDefault(_Header);
-	
-	var _ResultContainer = __webpack_require__(/*! ../components/ResultContainer/ResultContainer.jsx */ 366);
+	var _ResultContainer = __webpack_require__(/*! ./components/ResultContainer/ResultContainer.jsx */ 366);
 	
 	var _ResultContainer2 = _interopRequireDefault(_ResultContainer);
 	
@@ -44551,37 +44538,94 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var App = function (_Component) {
+		_inherits(App, _Component);
 	
-	var Airlines = function (_Component) {
-		_inherits(Airlines, _Component);
+		function App(props) {
+			_classCallCheck(this, App);
 	
-		function Airlines() {
-			_classCallCheck(this, Airlines);
+			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
-			return _possibleConstructorReturn(this, (Airlines.__proto__ || Object.getPrototypeOf(Airlines)).apply(this, arguments));
+			_this.state = {
+				flightData: {}
+			};
+	
+			return _this;
 		}
 	
-		_createClass(Airlines, [{
+		_createClass(App, [{
+			key: 'setQueryResults',
+			value: function setQueryResults(flightData) {
+				if (!flightData) console.log("it don't exist");
+				this.setState({
+					flightData: flightData
+				});
+				this.setState({
+					searchResults: true,
+					UndoStateChange: flightData
+				});
+			}
+		}, {
+			key: 'setStopsFilter',
+			value: function setStopsFilter(data) {
+				console.log(data.filter);
+				if (data.filter == true) {
+					this.setState({
+						flightData: data.flights
+					});
+				} else {
+					this.setState({
+						flightData: this.state.UndoStateChange
+					});
+				}
+			}
+		}, {
+			key: 'setAirlineFilter',
+			value: function setAirlineFilter(data) {
+				console.log("Data Filter: ", data.filter);
+				if (data.filter == true) {
+					this.setState({
+						flightData: data.flights
+					});
+				} else if (data.filter == false) {
+					this.setState({
+						flightData: this.state.UndoStateChange
+					});
+				}
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 	
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'h1',
+				// // console.log(this.state.flightData);
+				// // console.log(this.state.userSearch);
+				//let renderApp;
+				if (this.state.searchResults == true) {
+	
+					return _react2.default.createElement(
+						'div',
 						null,
-						'Airlines'
-					)
-				);
+						_react2.default.createElement(_Form2.default, {
+							setQueryResults: this.setQueryResults.bind(this)
+						}),
+						_react2.default.createElement(_ResultContainer2.default, {
+							flightData: this.state.flightData,
+							setStopsFilter: this.setStopsFilter.bind(this),
+							setAirlineFilter: this.setAirlineFilter.bind(this)
+						})
+					);
+				} else {
+					return _react2.default.createElement(_Form2.default, {
+						setQueryResults: this.setQueryResults.bind(this)
+					});
+				}
 			}
 		}]);
 	
-		return Airlines;
+		return App;
 	}(_react.Component);
 	
-	exports.default = Airlines;
+	exports.default = App;
 
 /***/ },
 /* 372 */
@@ -44626,7 +44670,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Destinations = function (_Component) {
 		_inherits(Destinations, _Component);
@@ -44638,16 +44682,55 @@
 		}
 	
 		_createClass(Destinations, [{
+			key: 'handleSubmit',
+			value: function handleSubmit(event) {
+				var _this2 = this;
+	
+				event.preventDefault();
+				axios.post('/flights/search', this.state).then(function (response) {
+					_this2.props.setQueryResults(response.data);
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 	
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'search-container' },
 					_react2.default.createElement(
-						'h1',
-						null,
-						'Destinations'
+						'div',
+						{ className: 'search-form' },
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Add Destinations'
+						),
+						_react2.default.createElement(
+							'form',
+							{ id: 'flight-Info', onSubmit: this.handleSubmit.bind(this) },
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-elements' },
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'depart' },
+									'Departing Airport'
+								),
+								_react2.default.createElement('input', { type: 'text', placeholder: 'Departing Airport' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'img' },
+									'Arriving Airport'
+								),
+								_react2.default.createElement('input', { type: 'text', placeholder: 'Arriving Airport' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'submit', className: 'responsive-label' },
+									_react2.default.createElement('input', { type: 'submit', className: 'submit', name: '', value: 'Add' })
+								)
+							)
+						)
 					)
 				);
 			}
@@ -44693,7 +44776,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Layout = function (_Component) {
 		_inherits(Layout, _Component);
