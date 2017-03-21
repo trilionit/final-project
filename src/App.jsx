@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 
-import Footer from './components/footer/Footer.jsx';
+
 import FormContainer from './components/form-component/Form.jsx';
-import Header from './components/header/Header.jsx';
 import ResultContainer from './components/ResultContainer/ResultContainer.jsx';
 
-require('./css/style.css');
 
 class App extends Component{
 	constructor(props){
@@ -53,14 +51,14 @@ class App extends Component{
 		}
 	}
 	render(){
-		// console.log(this.state.flightData);
-		// console.log(this.state.userSearch);
-		let renderApp;
+
+		// // console.log(this.state.flightData);
+		// // console.log(this.state.userSearch);
+		//let renderApp;
 		if(this.state.searchResults==true){
 	
 			return(
-				<div className="top">
-					<Header />
+				<div>
 					<FormContainer 
 						setQueryResults={this.setQueryResults.bind(this)}
 					/>
@@ -69,20 +67,14 @@ class App extends Component{
 						setStopsFilter={this.setStopsFilter.bind(this)}
 						setAirlineFilter={this.setAirlineFilter.bind(this)}
 					/>
-
-					<Footer />
 				</div>
 			);
 		}
 		else{
 			return(
-				<div className="top">
-					<Header />
-					<FormContainer 
-						setQueryResults={this.setQueryResults.bind(this)}
-					/>
-					<Footer />
-				</div>
+				<FormContainer 
+					setQueryResults={this.setQueryResults.bind(this)}
+				/>
 			);
 		}
 		

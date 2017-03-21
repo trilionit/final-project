@@ -1,22 +1,28 @@
 import React, {Component} from 'react';
 
 import Footer from '../components/footer/Footer.jsx';
-import FormContainer from '../components/form-component/Form.jsx';
 import Header from '../components/header/Header.jsx';
+
 
 
 require('../css/style.css');
 
-class Airports extends Component{
+class Layout extends Component{
 	
 	render(){
-			
+
+		    const { location } = this.props;	
 			return(
-				<div>
-					<h1>Airports</h1>
+				<div className="top">
+					<Header location={location} />
+					{this.props.children}
+					<Footer />
 				</div>
 			);
 	}
 	
 }
-export default Airports;
+export default Layout;
+
+
+

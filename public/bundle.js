@@ -59,21 +59,25 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 159);
 	
+	var _Airlines = __webpack_require__(/*! ./pages/Airlines.jsx */ 371);
+	
+	var _Airlines2 = _interopRequireDefault(_Airlines);
+	
+	var _Airports = __webpack_require__(/*! ./pages/Airports.jsx */ 370);
+	
+	var _Airports2 = _interopRequireDefault(_Airports);
+	
 	var _App = __webpack_require__(/*! ./App.jsx */ 222);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Airports = __webpack_require__(/*! ./pages/Airports.jsx */ 373);
-	
-	var _Airports2 = _interopRequireDefault(_Airports);
-	
-	var _Airlines = __webpack_require__(/*! ./pages/Airlines.jsx */ 374);
-	
-	var _Airlines2 = _interopRequireDefault(_Airlines);
-	
-	var _Destinations = __webpack_require__(/*! ./pages/Destinations.jsx */ 375);
+	var _Destinations = __webpack_require__(/*! ./pages/Destinations.jsx */ 372);
 	
 	var _Destinations2 = _interopRequireDefault(_Destinations);
+	
+	var _Layout = __webpack_require__(/*! ./pages/Layout.jsx */ 373);
+	
+	var _Layout2 = _interopRequireDefault(_Layout);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -81,15 +85,16 @@
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
-	  { history: _reactRouter.hashHistory },
+	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: "/", component: Layout },
-	    _react2.default.createElement(_reactRouter.IndexRoute, { component: Featured }),
-	    _react2.default.createElement(_reactRouter.Route, { path: "archives(/:article)", name: "archives", component: Archives }),
-	    _react2.default.createElement(_reactRouter.Route, { path: "settings", name: "settings", component: Settings })
+	    { path: "/", component: _Layout2.default },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _App2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: "airports", component: _Airports2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: "airlines", component: _Airlines2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: "destinations", component: _Destinations2.default })
 	  )
-	), app);
+	), root);
 	
 	// ReactDom.render(
 	// 	<Router history={browserHistory}>
@@ -26128,17 +26133,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Footer = __webpack_require__(/*! ./components/footer/Footer.jsx */ 223);
-	
-	var _Footer2 = _interopRequireDefault(_Footer);
-	
 	var _Form = __webpack_require__(/*! ./components/form-component/Form.jsx */ 224);
 	
 	var _Form2 = _interopRequireDefault(_Form);
-	
-	var _Header = __webpack_require__(/*! ./components/header/Header.jsx */ 363);
-	
-	var _Header2 = _interopRequireDefault(_Header);
 	
 	var _ResultContainer = __webpack_require__(/*! ./components/ResultContainer/ResultContainer.jsx */ 366);
 	
@@ -26151,8 +26148,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	__webpack_require__(/*! ./css/style.css */ 369);
 	
 	var App = function (_Component) {
 		_inherits(App, _Component);
@@ -26212,15 +26207,15 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				// console.log(this.state.flightData);
-				// console.log(this.state.userSearch);
-				var renderApp = void 0;
+	
+				// // console.log(this.state.flightData);
+				// // console.log(this.state.userSearch);
+				//let renderApp;
 				if (this.state.searchResults == true) {
 	
 					return _react2.default.createElement(
 						'div',
-						{ className: 'top' },
-						_react2.default.createElement(_Header2.default, null),
+						null,
 						_react2.default.createElement(_Form2.default, {
 							setQueryResults: this.setQueryResults.bind(this)
 						}),
@@ -26228,19 +26223,12 @@
 							flightData: this.state.flightData,
 							setStopsFilter: this.setStopsFilter.bind(this),
 							setAirlineFilter: this.setAirlineFilter.bind(this)
-						}),
-						_react2.default.createElement(_Footer2.default, null)
+						})
 					);
 				} else {
-					return _react2.default.createElement(
-						'div',
-						{ className: 'top' },
-						_react2.default.createElement(_Header2.default, null),
-						_react2.default.createElement(_Form2.default, {
-							setQueryResults: this.setQueryResults.bind(this)
-						}),
-						_react2.default.createElement(_Footer2.default, null)
-					);
+					return _react2.default.createElement(_Form2.default, {
+						setQueryResults: this.setQueryResults.bind(this)
+					});
 				}
 			}
 		}]);
@@ -43702,6 +43690,8 @@
 		_createClass(Header, [{
 			key: 'render',
 			value: function render() {
+				var location = this.props.location;
+	
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -43712,7 +43702,7 @@
 							'div',
 							{ className: 'top-wrap' },
 							_react2.default.createElement(_TopLeft2.default, null),
-							_react2.default.createElement(_Nav2.default, null)
+							_react2.default.createElement(_Nav2.default, { location: location })
 						)
 					)
 				);
@@ -43765,6 +43755,8 @@
 		_createClass(Nav, [{
 			key: 'render',
 			value: function render() {
+				var location = this.props.location;
+	
 				return _react2.default.createElement(
 					'div',
 					{ className: 'top-nav' },
@@ -43778,7 +43770,7 @@
 								'li',
 								null,
 								_react2.default.createElement(
-									_reactRouter.Link,
+									_reactRouter.IndexLink,
 									{ to: '/' },
 									'Home'
 								)
@@ -43788,7 +43780,7 @@
 								null,
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: '/add/airports' },
+									{ to: 'airports' },
 									'Add Airports'
 								)
 							),
@@ -43797,7 +43789,7 @@
 								null,
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: '/add/airlines' },
+									{ to: 'airlines' },
 									'Add Airlines'
 								)
 							),
@@ -43806,7 +43798,7 @@
 								null,
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: '/add/destinations' },
+									{ to: 'destinations' },
 									'Add Destinations'
 								)
 							)
@@ -44394,10 +44386,7 @@
 	module.exports = {"top":"style__top___3c1if","top-wrap":"style__top-wrap___1aMPM","logo":"style__logo___3yim3","top-nav":"style__top-nav___2fT-A","search-container":"style__search-container___27gPx","search-form":"style__search-form___1hmKy","form-elements":"style__form-elements___1EZdv","spacer":"style__spacer___3xOLy","submit":"style__submit___AaU-t","search-results":"style__search-results___34gQp","results-container":"style__results-container___j2Xcb","search-header":"style__search-header___3qOLH","search-title":"style__search-title___rhFlZ","result-element":"style__result-element___3hrFZ","show-results":"style__show-results___3tHPX","result-logo":"style__result-logo___17VUf","mid-element":"style__mid-element___NU5e7","result-price":"style__result-price___vwHSN","result-detail":"style__result-detail___3Eg1e","result-detail-btn":"style__result-detail-btn___3hBFH","result-detail-book":"style__result-detail-book___2f6vm","mid-contain-strip":"style__mid-contain-strip___mOSw4","footer":"style__footer___3-RVa"};
 
 /***/ },
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */
+/* 370 */
 /*!********************************!*\
   !*** ./src/pages/Airports.jsx ***!
   \********************************/
@@ -44415,21 +44404,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Footer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/footer/Footer.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Footer = __webpack_require__(/*! ../components/footer/Footer.jsx */ 223);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Form = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/form-component/Form.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Form = __webpack_require__(/*! ../components/form-component/Form.jsx */ 224);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _Header = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/header/Header.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Header = __webpack_require__(/*! ../components/header/Header.jsx */ 363);
 	
 	var _Header2 = _interopRequireDefault(_Header);
-	
-	var _ResultContainer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/ResultContainer/ResultContainer.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _ResultContainer2 = _interopRequireDefault(_ResultContainer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -44439,7 +44424,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Airports = function (_Component) {
 		_inherits(Airports, _Component);
@@ -44456,12 +44441,12 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ className: 'top' },
-					_react2.default.createElement(_Header2.default, null),
-					_react2.default.createElement(_Form2.default, {
-						setQueryResults: this.setQueryResults.bind(this)
-					}),
-					_react2.default.createElement(_Footer2.default, null)
+					null,
+					_react2.default.createElement(
+						'h1',
+						null,
+						'Airports'
+					)
 				);
 			}
 		}]);
@@ -44472,7 +44457,7 @@
 	exports.default = Airports;
 
 /***/ },
-/* 374 */
+/* 371 */
 /*!********************************!*\
   !*** ./src/pages/Airlines.jsx ***!
   \********************************/
@@ -44514,7 +44499,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Airlines = function (_Component) {
 		_inherits(Airlines, _Component);
@@ -44531,12 +44516,12 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ className: 'top' },
-					_react2.default.createElement(_Header2.default, null),
-					_react2.default.createElement(_Form2.default, {
-						setQueryResults: this.setQueryResults.bind(this)
-					}),
-					_react2.default.createElement(_Footer2.default, null)
+					null,
+					_react2.default.createElement(
+						'h1',
+						null,
+						'Airlines'
+					)
 				);
 			}
 		}]);
@@ -44547,7 +44532,7 @@
 	exports.default = Airlines;
 
 /***/ },
-/* 375 */
+/* 372 */
 /*!************************************!*\
   !*** ./src/pages/Destinations.jsx ***!
   \************************************/
@@ -44565,19 +44550,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Footer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/footer/Footer.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Footer = __webpack_require__(/*! ../components/footer/Footer.jsx */ 223);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Form = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/form-component/Form.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Form = __webpack_require__(/*! ../components/form-component/Form.jsx */ 224);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _Header = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/header/Header.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Header = __webpack_require__(/*! ../components/header/Header.jsx */ 363);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _ResultContainer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/ResultContainer/ResultContainer.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ResultContainer = __webpack_require__(/*! ../components/ResultContainer/ResultContainer.jsx */ 366);
 	
 	var _ResultContainer2 = _interopRequireDefault(_ResultContainer);
 	
@@ -44589,7 +44574,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/style.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Destinations = function (_Component) {
 		_inherits(Destinations, _Component);
@@ -44606,12 +44591,12 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ className: 'top' },
-					_react2.default.createElement(_Header2.default, null),
-					_react2.default.createElement(_Form2.default, {
-						setQueryResults: this.setQueryResults.bind(this)
-					}),
-					_react2.default.createElement(_Footer2.default, null)
+					null,
+					_react2.default.createElement(
+						'h1',
+						null,
+						'Destinations'
+					)
 				);
 			}
 		}]);
@@ -44620,6 +44605,72 @@
 	}(_react.Component);
 	
 	exports.default = Destinations;
+
+/***/ },
+/* 373 */
+/*!******************************!*\
+  !*** ./src/pages/Layout.jsx ***!
+  \******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Footer = __webpack_require__(/*! ../components/footer/Footer.jsx */ 223);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	var _Header = __webpack_require__(/*! ../components/header/Header.jsx */ 363);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	__webpack_require__(/*! ../css/style.css */ 369);
+	
+	var Layout = function (_Component) {
+		_inherits(Layout, _Component);
+	
+		function Layout() {
+			_classCallCheck(this, Layout);
+	
+			return _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).apply(this, arguments));
+		}
+	
+		_createClass(Layout, [{
+			key: 'render',
+			value: function render() {
+				var location = this.props.location;
+	
+				return _react2.default.createElement(
+					'div',
+					{ className: 'top' },
+					_react2.default.createElement(_Header2.default, { location: location }),
+					this.props.children,
+					_react2.default.createElement(_Footer2.default, null)
+				);
+			}
+		}]);
+	
+		return Layout;
+	}(_react.Component);
+	
+	exports.default = Layout;
 
 /***/ }
 /******/ ]);

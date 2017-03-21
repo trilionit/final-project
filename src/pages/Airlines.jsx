@@ -6,22 +6,21 @@ import Header from '../components/header/Header.jsx';
 import ResultContainer from '../components/ResultContainer/ResultContainer.jsx';
 
 
-require('./css/style.css');
+require('../css/style.css');
 
 class Airlines extends Component{
 	
 	render(){
 			
 			return(
-				<div className="top">
-					<Header />
-					<FormContainer 
-						setQueryResults={this.setQueryResults.bind(this)}
-					/>
-					<Footer />
+				<div>
+				<h1>Airlines</h1>	
 				</div>
 			);
 	}
 	
 }
 export default Airlines;
+
+
+

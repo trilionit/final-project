@@ -1,24 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
 
-import App from './App.jsx';
-import Airports from './pages/Airports.jsx';
 import Airlines from './pages/Airlines.jsx';
+import Airports from './pages/Airports.jsx';
+import App from './App.jsx';
 import Destinations from './pages/Destinations.jsx';
+import Layout from './pages/Layout.jsx';
 
 
 const root = document.getElementById('root');
 
 ReactDOM.render(
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Featured}></IndexRoute>
-      <Route path="archives(/:article)" name="archives" component={Archives}></Route>
-      <Route path="settings" name="settings" component={Settings}></Route>
+    	<IndexRoute component={App}></IndexRoute>
+    	<Route path="airports" component={Airports} />
+		<Route path="airlines" component={Airlines} />
+		<Route path="destinations" component={Destinations} />
     </Route>
   </Router>,
-app);
+root);
 
 // ReactDom.render(
 // 	<Router history={browserHistory}>

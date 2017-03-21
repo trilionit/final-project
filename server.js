@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-let port =3030;
+let port =3000;
 //body parser to process forms
 const bodyParser = require('body-parser');
 // Routers
