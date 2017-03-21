@@ -6,19 +6,21 @@ var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
 
-var config    = require(__dirname + '/..\config\config.json')[env];
+// Load DB config from config file
+var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
 // Init sequelize with params from config file
 console.log('Create sequelize...');
 console.log('config env', env);
 console.log('config', config);
 
+const sequelize = new Sequelize('postgres://postgres:123456@localhost:5432/skyFlights');
 var db        = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// if (config.use_env_variable) {
+//   var sequelize = new Sequelize(process.env[config.use_env_variable]);
+// } else {
+//   var sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 fs
   .readdirSync(__dirname)

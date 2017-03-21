@@ -15,7 +15,7 @@ app.use( express.static(path.join(__dirname, 'public')));
 
 // mount routers
 app.use('/', Index);
-//app.use('/blog/posts', routePosts);
+app.use('/', dbPosts);
 
 //send any route to index.html where the react app is mounted
 app.get('*', (req,res)=>{
