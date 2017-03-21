@@ -26148,6 +26148,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var axios = __webpack_require__(/*! axios */ 338);
+	
 	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Airlines = function (_Component) {
@@ -44405,55 +44407,74 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var axios = __webpack_require__(/*! axios */ 338);
 	__webpack_require__(/*! ../css/style.css */ 369);
 	
 	var Airports = function (_Component) {
 		_inherits(Airports, _Component);
 	
-		function Airports() {
+		function Airports(props) {
 			_classCallCheck(this, Airports);
 	
-			return _possibleConstructorReturn(this, (Airports.__proto__ || Object.getPrototypeOf(Airports)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (Airports.__proto__ || Object.getPrototypeOf(Airports)).call(this, props));
+	
+			_this.state = {
+				name: "",
+				iata: "",
+				longitude: "",
+				latitude: ""
+			};
+			return _this;
 		}
 	
 		_createClass(Airports, [{
+			key: 'handleAirport',
+			value: function handleAirport(event) {
+				var target = event.target;
+				var value = target.value;
+				this.setState({
+					name: value
+				});
+			}
+		}, {
+			key: 'handleIATA',
+			value: function handleIATA(event) {
+				var target = event.target;
+				var value = target.value;
+				this.setState({
+					iata: value
+				});
+			}
+		}, {
+			key: 'handleLongitude',
+			value: function handleLongitude(event) {
+				var target = event.target;
+				var value = target.value;
+				this.setState({
+					longitude: value
+				});
+			}
+		}, {
+			key: 'handleLatitude',
+			value: function handleLatitude(event) {
+				var target = event.target;
+				var value = target.value;
+				this.setState({
+					latitude: value
+				});
+			}
+		}, {
 			key: 'handleSubmit',
-	
-			// handleName(event){
-			// 	let target= event.target;
-			// 	let name=target.value;
-			// 	this.setState({
-			// 		n
-			// 	})
-			// }
-			// handleIata(event){
-	
-			// }
-			// handleLongitude(event){
-	
-			// }
-			// handleLatitude(event){
-	
-			// }
-			// handleContinent(event){
-	
-			// }
-	
 			value: function handleSubmit(event) {
 				event.preventDefault();
-				var target = event.target;
-				var name = target.value;
-				//console.log(airport);
-	
-				// axios.post('/flights/search', this.state)
-				// 		.then((response) => {
-				// 			this.props.setQueryResults(response.data);
-				// });
+				axios.post('/add/airports', this.state).then(function (response) {
+					console.log(response);
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-	
+				//console.log("Form State: ",this.state);
 				return _react2.default.createElement(
 					'div',
 					{ className: 'search-container' },
@@ -44476,31 +44497,25 @@
 									{ htmlFor: 'depart' },
 									'Airport Name:'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Airport Name' }),
+								_react2.default.createElement('input', { type: 'text', name: 'name', onChange: this.handleAirport.bind(this), placeholder: 'Airport Name' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'iata' },
 									'IATA Code'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'iata', placeholder: 'IATA Code' }),
+								_react2.default.createElement('input', { type: 'text', name: 'iata', onChange: this.handleIATA.bind(this), placeholder: 'IATA Code' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'longitude', className: 'spacer responsive-label' },
 									'Longitude'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'longitude', className: 'input-text', placeholder: 'longitude' }),
+								_react2.default.createElement('input', { type: 'text', name: 'longitude', onChange: this.handleLongitude.bind(this), className: 'input-text', placeholder: 'longitude' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'latitude', className: 'spacer responsive-label' },
 									'Latitude'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'latitude', className: 'input-text', placeholder: 'latitude' }),
-								_react2.default.createElement(
-									'label',
-									{ htmlFor: 'continent', className: 'spacer responsive-label' },
-									'Continent'
-								),
-								_react2.default.createElement('input', { type: 'text', name: 'continent', className: 'input-text', placeholder: 'Continent' }),
+								_react2.default.createElement('input', { type: 'text', name: 'latitude', onChange: this.handleLatitude.bind(this), className: 'input-text', placeholder: 'latitude' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'submit', className: 'responsive-label' },
@@ -44684,6 +44699,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var axios = __webpack_require__(/*! axios */ 338);
 	
 	__webpack_require__(/*! ../css/style.css */ 369);
 	

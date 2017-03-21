@@ -7,16 +7,16 @@ models.sequelize.sync();
 
 //route for adding airports
 router.post("/add/airports", function(req, res){
-	let userData=req.body;	
-	let userDepart =userData.departure.toLowerCase();	
-	let userArrive= userData.destination.toLowerCase();
-	
-	let matchedDepAndDest= destinations.filter(function(search){
-		let dep=search.departure.toLowerCase();
-		let dest=search.destination.toLowerCase();
-		if(dep.includes(userDepart)==true && dest.includes(userArrive)==true){
-			return search;
-		}
+	let data=req.body;	
+	models.airports.create({
+		name: data.name,
+		iata:data.iata,
+		airportType:"Airport",
+		longitude:data.longitude,
+		latitude:data.latitude,
+		continent:"NA"
+	}).then(function(send){
+		res.send(send);
 	})
 
 });
