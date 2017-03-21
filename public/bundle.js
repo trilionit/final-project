@@ -95,15 +95,6 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: "destinations", component: _Destinations2.default })
 	  )
 	), root);
-	
-	// ReactDom.render(
-	// 	<Router history={browserHistory}>
-	// 		<Route path="/" component={App} />
-	// 		<Route path="/add/airports" Component={Airports} />
-	// 		<Route path="/add/airlines" Component={Airlines} />
-	// 		<Route path="/add/destinations" Component={Destinations} />
-	// 	</Router>
-	// 	, document.getElementById('root'));
 
 /***/ },
 /* 1 */

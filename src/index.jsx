@@ -21,12 +21,3 @@ ReactDOM.render(
     </Route>
   </Router>,
 root);
-
-// ReactDom.render(
-// 	<Router history={browserHistory}>
-// 		<Route path="/" component={App} />
-// 		<Route path="/add/airports" Component={Airports} />
-// 		<Route path="/add/airlines" Component={Airlines} />
-// 		<Route path="/add/destinations" Component={Destinations} />
-// 	</Router>
-// 	, document.getElementById('root'));
