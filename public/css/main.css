@@ -63,12 +63,12 @@ nav ul li a, nav ul li a:hover{
 }
 .search-container{
 	width:80%;
-	height: 160px;
-	position: relative;
+	height: auto;
+	display:inline-block;
 	background: rgb(38, 1, 38);
 	background: rgba(38, 1, 38, 0.6);
 	padding:30px;
-	margin:15% auto 30px auto;
+	margin:10% 8% 30px 8%;
 }
 .search-form{
 	float:left;
@@ -92,6 +92,14 @@ nav ul li a, nav ul li a:hover{
 	border:1px solid #E3E3E3;
 	color: #898989;
 	width: 20%;
+	padding: 10px;
+	margin:10px 20px 10px 0;
+
+}
+.input-text{
+	border:1px solid #E3E3E3;
+	color: #898989;
+	width: 8%;
 	padding: 10px;
 	margin:10px 20px 10px 0;
 
