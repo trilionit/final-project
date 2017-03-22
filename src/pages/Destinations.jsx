@@ -9,6 +9,48 @@ const axios = require('axios');
 require('../css/style.css');
 
 class Destinations extends Component{
+	constructor(props){
+		super(props)
+		this.state={
+			name:"",
+			iata:"",
+			longitude:"",
+			latitude:""
+		}
+	}
+
+	handleAirport(event){
+		let target = event.target;
+    	let value = target.value;
+		this.setState({
+			name: value
+		})
+	}
+
+	handleIATA(event){
+		let target = event.target;
+    	let value = target.value;
+		this.setState({
+			iata: value
+		})
+	}
+
+	handleLongitude(event){
+		let target = event.target;
+    	let value = target.value;
+		this.setState({
+			longitude: value
+		})
+	}
+
+	handleLatitude(event){
+		let target = event.target;
+    	let value = target.value;
+		this.setState({
+			latitude: value
+		})
+	}
+
 	handleSubmit(event){
 		event.preventDefault();
 		axios.post('/flights/search', this.state)
@@ -26,9 +68,9 @@ class Destinations extends Component{
 				<form id="flight-Info" onSubmit={this.handleSubmit.bind(this)}>
 					<div className="form-elements">
 						<label htmlFor="depart">Departing Airport</label>
-							<input type="text" placeholder="Departing Airport" />
+							<input type="text" name="departure" placeholder="Departing Airport" />
 						<label htmlFor="img">Arriving Airport</label>
-						  <input type="text" placeholder="Arriving Airport" />
+						  <input type="text" name="destination" placeholder="Arriving Airport" />
 						<label htmlFor="submit" className="responsive-label">
 					      <input type="submit" className="submit" name="" value="Add" />
 						</label>

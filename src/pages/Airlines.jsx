@@ -9,11 +9,35 @@ const axios = require('axios');
 require('../css/style.css');
 
 class Airlines extends Component{
+	constructor(props){
+		super(props)
+		this.state={
+			name:"",
+			imgUrl:""
+		}
+	}
+
+	handleAirline(event){
+		let target = event.target;
+    	let value = target.value;
+		this.setState({
+			name: value
+		})
+	}
+
+	handleImgUrl(event){
+		let target = event.target;
+    	let value = target.value;
+		this.setState({
+			imgurl: value
+		})
+	}
+
 	handleSubmit(event){
 		event.preventDefault();
-		axios.post('/flights/search', this.state)
+		axios.post('/add/airlines', this.state)
   		.then((response) => {
-  			this.props.setQueryResults(response.data);
+  			console.log(response);
 		});
 	}
 	render(){
@@ -25,9 +49,9 @@ class Airlines extends Component{
 				<form id="flight-Info" onSubmit={this.handleSubmit.bind(this)}>
 					<div className="form-elements">
 						<label htmlFor="depart">Airline Name:</label>
-							<input type="text" placeholder="Airline Name" />
+							<input type="text" name="airline" onChange={this.handleAirline.bind(this)} placeholder="Airline Name" />
 						<label htmlFor="img">IMG URL</label>
-						  <input type="text" placeholder="IMG URL" />
+						  <input type="text" name="imgUrl" onChange={this.handleImgUrl.bind(this)} placeholder="IMG URL" />
 						<label htmlFor="submit" className="responsive-label">
 					      <input type="submit" className="submit" name="" value="Add" />
 						</label>
