@@ -26155,20 +26155,42 @@
 	var Airlines = function (_Component) {
 		_inherits(Airlines, _Component);
 	
-		function Airlines() {
+		function Airlines(props) {
 			_classCallCheck(this, Airlines);
 	
-			return _possibleConstructorReturn(this, (Airlines.__proto__ || Object.getPrototypeOf(Airlines)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (Airlines.__proto__ || Object.getPrototypeOf(Airlines)).call(this, props));
+	
+			_this.state = {
+				name: "",
+				imgUrl: ""
+			};
+			return _this;
 		}
 	
 		_createClass(Airlines, [{
+			key: 'handleAirline',
+			value: function handleAirline(event) {
+				var target = event.target;
+				var value = target.value;
+				this.setState({
+					name: value
+				});
+			}
+		}, {
+			key: 'handleImgUrl',
+			value: function handleImgUrl(event) {
+				var target = event.target;
+				var value = target.value;
+				this.setState({
+					imgurl: value
+				});
+			}
+		}, {
 			key: 'handleSubmit',
 			value: function handleSubmit(event) {
-				var _this2 = this;
-	
 				event.preventDefault();
-				axios.post('/flights/search', this.state).then(function (response) {
-					_this2.props.setQueryResults(response.data);
+				axios.post('/add/airlines', this.state).then(function (response) {
+					console.log(response);
 				});
 			}
 		}, {
@@ -26197,13 +26219,13 @@
 									{ htmlFor: 'depart' },
 									'Airline Name:'
 								),
-								_react2.default.createElement('input', { type: 'text', placeholder: 'Airline Name' }),
+								_react2.default.createElement('input', { type: 'text', name: 'airline', onChange: this.handleAirline.bind(this), placeholder: 'Airline Name' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'img' },
 									'IMG URL'
 								),
-								_react2.default.createElement('input', { type: 'text', placeholder: 'IMG URL' }),
+								_react2.default.createElement('input', { type: 'text', name: 'imgUrl', onChange: this.handleImgUrl.bind(this), placeholder: 'IMG URL' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'submit', className: 'responsive-label' },
@@ -43673,7 +43695,9 @@
 		_createClass(Header, [{
 			key: 'render',
 			value: function render() {
-				var location = this.props.location;
+				var _props = this.props,
+				    location = _props.location,
+				    setDestinations = _props.setDestinations;
 	
 				return _react2.default.createElement(
 					'div',
@@ -43685,7 +43709,7 @@
 							'div',
 							{ className: 'top-wrap' },
 							_react2.default.createElement(_TopLeft2.default, null),
-							_react2.default.createElement(_Nav2.default, { location: location })
+							_react2.default.createElement(_Nav2.default, { location: location, setDestinations: setDestinations })
 						)
 					)
 				);
@@ -43726,19 +43750,44 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var axios = __webpack_require__(/*! axios */ 338);
+	
 	var Nav = function (_Component) {
 		_inherits(Nav, _Component);
 	
-		function Nav() {
+		function Nav(props) {
 			_classCallCheck(this, Nav);
 	
-			return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
+	
+			_this.state = {
+				destinations: []
+			};
+			_this.handleDestinations = _this.handleDestinations.bind(_this);
+	
+			return _this;
 		}
 	
 		_createClass(Nav, [{
+			key: 'handleDestinations',
+			value: function handleDestinations(event) {
+				axios.get('/list/airlines').then(function (response) {
+					var destinations = [];
+					//console.log(response.data);
+					// let res = response.data;
+					for (var i = 0; i < response.data.length; i++) {
+						destinations.push(response.data[i].name);
+					}
+					//console.log(destinations);
+					this.setState({ destinations: destinations });
+					//console.log("New State: ", this.state.destinations);
+				}.bind(this));
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var location = this.props.location;
+				var setDestinations = this.state.setDestinations;
 	
 				return _react2.default.createElement(
 					'div',
@@ -43778,10 +43827,10 @@
 							),
 							_react2.default.createElement(
 								'li',
-								null,
+								{ onClick: this.handleDestinations },
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: 'destinations' },
+									{ to: 'destinations', setDestinations: setDestinations },
 									'Add Destinations'
 								)
 							)
@@ -44707,26 +44756,22 @@
 	var Destinations = function (_Component) {
 		_inherits(Destinations, _Component);
 	
-		function Destinations() {
+		function Destinations(props) {
 			_classCallCheck(this, Destinations);
 	
-			return _possibleConstructorReturn(this, (Destinations.__proto__ || Object.getPrototypeOf(Destinations)).apply(this, arguments));
+			return _possibleConstructorReturn(this, (Destinations.__proto__ || Object.getPrototypeOf(Destinations)).call(this, props));
 		}
 	
 		_createClass(Destinations, [{
-			key: 'handleSubmit',
-			value: function handleSubmit(event) {
-				var _this2 = this;
-	
-				event.preventDefault();
-				axios.post('/flights/search', this.state).then(function (response) {
-					_this2.props.setQueryResults(response.data);
-				});
-			}
-		}, {
 			key: 'render',
 			value: function render() {
-	
+				var list = this.props.destinations;
+				console.log("Props: ", list);
+				// let airlineLists=u.map((ls)=>{
+				// 	return(
+				// 		<option key={ls.id}>{ls.name}</option>
+				// 	)
+				// })
 				return _react2.default.createElement(
 					'div',
 					{ className: 'search-container' },
@@ -44740,22 +44785,48 @@
 						),
 						_react2.default.createElement(
 							'form',
-							{ id: 'flight-Info', onSubmit: this.handleSubmit.bind(this) },
+							{ id: 'flight-Info' },
 							_react2.default.createElement(
 								'div',
 								{ className: 'form-elements' },
 								_react2.default.createElement(
 									'label',
-									{ htmlFor: 'depart' },
+									{ htmlFor: 'departure' },
 									'Departing Airport'
 								),
-								_react2.default.createElement('input', { type: 'text', placeholder: 'Departing Airport' }),
+								_react2.default.createElement(
+									'select',
+									{ name: 'departure' },
+									_react2.default.createElement(
+										'option',
+										null,
+										'airlineLists'
+									)
+								),
 								_react2.default.createElement(
 									'label',
-									{ htmlFor: 'img' },
+									{ htmlFor: 'destination' },
 									'Arriving Airport'
 								),
-								_react2.default.createElement('input', { type: 'text', placeholder: 'Arriving Airport' }),
+								_react2.default.createElement('input', { type: 'text', name: 'destination', placeholder: 'Arriving Airport' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'airline' },
+									'Airline'
+								),
+								_react2.default.createElement('input', { type: 'text', name: 'airline', placeholder: 'Airline' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'flightNumber' },
+									'Flight Number'
+								),
+								_react2.default.createElement('input', { type: 'text', name: 'flightNumber', placeholder: 'Flight Number' }),
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'fare' },
+									'Fare'
+								),
+								_react2.default.createElement('input', { type: 'text', name: 'fare', placeholder: 'Fare' }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'submit', className: 'responsive-label' },
@@ -44822,12 +44893,15 @@
 		_createClass(Layout, [{
 			key: 'render',
 			value: function render() {
-				var location = this.props.location;
+				var _props = this.props,
+				    location = _props.location,
+				    setDestinations = _props.setDestinations;
+	
 	
 				return _react2.default.createElement(
 					'div',
 					{ className: 'top' },
-					_react2.default.createElement(_Header2.default, { location: location }),
+					_react2.default.createElement(_Header2.default, { location: (location, setDestinations) }),
 					this.props.children,
 					_react2.default.createElement(_Footer2.default, null)
 				);

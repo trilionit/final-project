@@ -4,13 +4,13 @@ import TopLeft from './TopLeft.jsx';
 
 class Header extends Component {
 	render(){
-		const { location } = this.props;
+		const { location, setDestinations } = this.props;
 		return(
 			<div>
 				<header>
 					<div className="top-wrap">
 						<TopLeft />
-						<Nav location={location} />
+						<Nav location={location} setDestinations={setDestinations} />
 					</div>
 				</header>
 			</div>

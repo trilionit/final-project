@@ -11,10 +11,11 @@ class Layout extends Component{
 	
 	render(){
 
-		    const { location } = this.props;	
+		    const { location, setDestinations  } = this.props;
+
 			return(
 				<div className="top">
-					<Header location={location} />
+					<Header location={location, setDestinations} />
 					{this.props.children}
 					<Footer />
 				</div>

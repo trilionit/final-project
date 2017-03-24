@@ -17,7 +17,7 @@ ReactDOM.render(
     	<IndexRoute component={App}></IndexRoute>
     	<Route path="airports" component={Airports} />
 		<Route path="airlines" component={Airlines} />
-		<Route path="destinations" component={Destinations} />
+		<Route path="destinations" component={Destinations}  />
     </Route>
   </Router>,
 root);

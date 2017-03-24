@@ -1,9 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var destinations = sequelize.define('destinations', {
-    depart: DataTypes.STRING,
-    arrive: DataTypes.STRING,
-    airline:DataTypes.STRING,
+    departAirportId: DataTypes.INTEGER,
+    arriveAirportId: DataTypes.INTEGER,
+    airlineId:DataTypes.INTEGER,
     flightNumber:DataTypes.INTEGER,
     fare: DataTypes.STRING
   }, {

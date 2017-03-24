@@ -1,10 +1,10 @@
 "use strict"
-//const models=require('../models');
+const models=require('../models');
 const express= require('express');
 const destinations = require('../JSON-db/destinations.json');
 const airports = require('../JSON-airports/airports.json');
 const router = express.Router();
-//models.sequelize.sync();
+models.sequelize.sync();
 //route for adding airports
 router.post("/flights/search", function(req, res){
 	let userData=req.body;	
@@ -144,6 +144,13 @@ router.get("/flights/airports", function(req, res){
 
 });
 
+router.get("/list/airlines", function(req, res){
+	models.airports.findAll({
+  		order: [['id', 'Asc']]
+  	}).then(function (data){
+		res.json(data);
+	});
+});
 
 
 
