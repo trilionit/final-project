@@ -7,7 +7,8 @@ const router = express.Router();
 models.sequelize.sync();
 //route for adding airports
 router.post("/flights/search", function(req, res){
-	let userData=req.body;	
+	//Flight search with sequelize
+	let userData=req.body;
 	let userDepart =userData.departure.toLowerCase();	
 	let userArrive= userData.destination.toLowerCase();
 	
