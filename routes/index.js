@@ -1,49 +1,75 @@
 "use strict"
 const models=require('../models');
 const express= require('express');
-const destinations = require('../JSON-db/destinations.json');
-const airports = require('../JSON-airports/airports.json');
 const router = express.Router();
 models.sequelize.sync();
 //route for adding airports
 router.post("/flights/search", function(req, res){
 	//Flight search with sequelize
 	let userData=req.body;
-	// let userDepart =userData.departure.toLowerCase();	
-	// let userArrive= userData.destination.toLowerCase();
-	let userDepart=userData.departure;
-	let userArrive=userData.destination;
-	let newArr=[];
-	models.airports.findAll({
-		name: {
-        	$like: 'userDepart%'
-      	}
-	}).then(function(data){
-		if(data.length > 1){
-			let obj1={
-				departId:data[0].id,
-				departAirport:data[0].name
+	let userDepart =userData.departure.toLowerCase();	
+	let userArrive= userData.destination.toLowerCase();
+	// let userDepart=userData.departure;
+	// let userArrive=userData.destination;
+	const AirportArray=[];
+	models.airports.findAll().then(function(Airports){
+		//console.log(depart.name);
+		for (var i=0; i <Airports.length; i++){
+			let airportObject={
+				id:Airports[i].id,
+				iata:Airports[i].iata.toLowerCase(),
+				AirportName:Airports[i].name.toLowerCase()
 			}
-			newArr.push(obj1);	
+			AirportArray.push(airportObject);
+
 		}
-		
-		console.log("Searched>>>>>", newArr);
-	}).then(function(newData){
-		models.airports.findAll({
-			name: {
-        		$like: 'userArrive%'
-      		}
-		}).then(function(data2){
-			if(data2.length > 1){
-				let obj2={
-					arriveId:data2[0].id,
-					arriveAirport:data2[0].name
+	
+	let matchDeparture= AirportArray.filter(function(search){
+		let dep=search.AirportName.toLowerCase();
+		let iata=search.iata.toLowerCase();
+		if(dep.includes(userDepart) ==true){
+			return search;
+		}
+	});
+
+	let matchDestination= AirportArray.filter(function(search){
+	let dest=search.AirportName.toLowerCase();
+	let iata=search.iata.toLowerCase();
+		if(dest.includes(userArrive) || iata.includes(userArrive)){
+			return search;
+		}
+	});
+	
+	let departId= matchDeparture[0].id;	
+	let arriveId=  matchDestination[0].id;
+	console.log("Airports:", AirportArray);
+	console.log("Depart ID:",departId);
+	console.log("Arrive ID:",arriveId);
+
+		models.destinations.findAll({
+			where:{
+				departAirportId:departId,
+				 arriveAirportId:arriveId
+			}
+		}).then(function(matched){
+			if(matched.length !=0){
+				let airlineId;
+				let flightNumber;
+				let matchedFare;
+				let matchedObject;
+				for(var i=0; i< matched.length; i++){
+					matchedObject={
+						airlineId:matched[i].airlineId,
+						flightNumber:matched[i].flightNumber,
+						matchedFare:matched[i].fare
+					}
+					return matchedObject;
 				}
-				newArr.push(obj2);	
-			}	
+			}
+			
 		})
-		console.log("Search>>>>>>", newArr);
-	})
+	});
+	
 	
 	// let matchedDepAndDest= destinations.filter(function(search){
 	// 	let dep=search.departure.toLowerCase();
