@@ -57,14 +57,16 @@ router.post("/flights/search", function(req, res){
 				let flightNumber;
 				let matchedFare;
 				let matchedObject;
+				let matchedArray=[];
 				for(var i=0; i< matched.length; i++){
 					matchedObject={
 						airlineId:matched[i].airlineId,
 						flightNumber:matched[i].flightNumber,
 						matchedFare:matched[i].fare
 					}
-					return matchedObject;
+					matchedArray.push(matchedObject);
 				}
+				console.log("Matched Object: ", matchedArray);
 			}
 			
 		})
