@@ -23,11 +23,10 @@ router.post("/flights/search", function(req, res){
 			AirportArray.push(airportObject);
 
 		}
-	
 	let matchDeparture= AirportArray.filter(function(search){
 		let dep=search.AirportName.toLowerCase();
 		let iata=search.iata.toLowerCase();
-		if(dep.includes(userDepart) ==true){
+		if(dep.includes(userDepart) ==true || iata.includes(userDepart) ==true){
 			return search;
 		}
 	});
@@ -35,13 +34,15 @@ router.post("/flights/search", function(req, res){
 	let matchDestination= AirportArray.filter(function(search){
 	let dest=search.AirportName.toLowerCase();
 	let iata=search.iata.toLowerCase();
-		if(dest.includes(userArrive) || iata.includes(userArrive)){
+		if(dest.includes(userArrive)==true || iata.includes(userArrive)==true){
 			return search;
 		}
 	});
 	
 	let departId= matchDeparture[0].id;	
 	let arriveId=  matchDestination[0].id;
+	let departAirport=matchDeparture[0].airportName;
+	let arriveAirport=matchDestination[0].airportName;
 	console.log("Airports:", AirportArray);
 	console.log("Depart ID:",departId);
 	console.log("Arrive ID:",arriveId);
@@ -53,20 +54,49 @@ router.post("/flights/search", function(req, res){
 			}
 		}).then(function(matched){
 			if(matched.length !=0){
-				let airlineId;
-				let flightNumber;
-				let matchedFare;
-				let matchedObject;
+				let newFare;
 				let matchedArray=[];
+				let data;
+				let adultPax=parseInt(userData.adultPax);
+				let childPax=parseInt(userData.childPax);
+				let TotalPax= (adultPax + childPax);
+				
 				for(var i=0; i< matched.length; i++){
-					matchedObject={
-						airlineId:matched[i].airlineId,
-						flightNumber:matched[i].flightNumber,
-						matchedFare:matched[i].fare
-					}
-					matchedArray.push(matchedObject);
+					newFare = (TotalPax * matched[i].fare);
+					models.airlines.findAll({
+						where:{
+							id:matched[i].airlineId
+						}
+					}).then(function(airlines){
+						console.log("airlines length in db", airlines.length);
+						// data={
+						// 	id:matched[i].id,
+						// 	departure:departAirport,
+						// 	destination:arriveAirport,
+						// 	airline:airlines[0].name,
+						// 	flightNumber:matched[i].flightNumber,
+						// 	imgUrl:airlines[0].imgUrl,
+						// 	departTime:"10:00am",
+						// 	arriveTime:"2:35pm",
+						// 	flightTime:"2h:30min",
+						// 	adultPax:userData.adultPax,
+						// 	childPax:userData.childPax,
+						// 	fare:newFare,
+						// 	stops:0
+						// }
+						// matchedArray.push(matchedObject);
+						// console.log("Matched Array: ", matchedArray.length);
+					});
+					
+						
+					
 				}
-				console.log("Matched Object: ", matchedArray);
+			 	console.log("Matched Object: ", matched.length);
+
+
+				
+				
+				
 			}
 			
 		})
@@ -184,35 +214,35 @@ router.post("/flights/search", function(req, res){
 
 });
 
-router.get("/flights/airports", function(req, res){
-	//filter airport list for NA only
-	//let input=req.body.phrase;	
-	//input =input.toLowerCase();
-	let filterAirports= airports.filter(function(lists){
-			return lists.continent=="NA" && lists.type=="airport" && lists.name !=null;
-	});
+// router.get("/flights/airports", function(req, res){
+// 	//filter airport list for NA only
+// 	//let input=req.body.phrase;	
+// 	//input =input.toLowerCase();
+// 	let filterAirports= airports.filter(function(lists){
+// 			return lists.continent=="NA" && lists.type=="airport" && lists.name !=null;
+// 	});
 	
-		var arr={};
-		var sugg=[];
-		for (var i=0; i < filterAirports.length; i++){
-			arr={"value": filterAirports[i].name, "data": filterAirports[i].iata}
-			sugg.push(arr);			
-		}
-		let data={
-				"suggestions": sugg
-			}
-	console.log(data.suggestions);
-	res.send(data);
+// 		var arr={};
+// 		var sugg=[];
+// 		for (var i=0; i < filterAirports.length; i++){
+// 			arr={"value": filterAirports[i].name, "data": filterAirports[i].iata}
+// 			sugg.push(arr);			
+// 		}
+// 		let data={
+// 				"suggestions": sugg
+// 			}
+// 	console.log(data.suggestions);
+// 	res.send(data);
 
-});
+// });
 
-router.get("/list/airlines", function(req, res){
-	models.airports.findAll({
-  		order: [['id', 'Asc']]
-  	}).then(function (data){
-		res.json(data);
-	});
-});
+// router.get("/list/airlines", function(req, res){
+// 	models.airports.findAll({
+//   		order: [['id', 'Asc']]
+//   	}).then(function (data){
+// 		res.json(data);
+// 	});
+// });
 
 
 
