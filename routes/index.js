@@ -70,7 +70,7 @@ router.post("/flights/search", function(req, res){
 					}).then(function(airlines){
 						console.log("airlines length in db", airlines.length);
 						// data={
-						// 	id:matched[i].id,
+						// 	id:matched[i].airlineId,
 						// 	departure:departAirport,
 						// 	destination:arriveAirport,
 						// 	airline:airlines[0].name,
