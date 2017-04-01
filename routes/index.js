@@ -56,6 +56,7 @@ router.post("/flights/search", function(req, res){
 			if(matched.length !=0){
 				let newFare;
 				let matchedArray=[];
+				let newArr=[];
 				let data;
 				let adultPax=parseInt(userData.adultPax);
 				let childPax=parseInt(userData.childPax);
@@ -80,23 +81,31 @@ router.post("/flights/search", function(req, res){
 							id:matchedArray[i].airlineId
 						}
 					}).then(function(m){
-						let newArr=[];
+						
 						for(var i=0; i <m.length; i ++){
-							data={
+							let data={
 								airlineId:m[i].id,
 								airline:m[i].name,
-								flightNumber:matchedArray[i].flightNumber,
 								imgUrl:m[i].imgUrl,
-								adultPax:adultPax,
-								childPax:childPax,
-								fare:matchedArray[i].fare,
 								stops:0
 							}
 							newArr.push(data);
 						}
-						console.log(newArr);
+						//console.log("NA:",newArr);
+						console.log("///////////////////////////");
+				console.log("matchedDepartures:", matchDeparture);
+				console.log("matchedDestinations:", matchDestination);
+				console.log("////////////////////////////");
+				console.log("matchedArray:", matchedArray);
+				console.log("NewArray:", newArr);
 					})
 				}
+				
+
+
+
+
+
 			 }
 			// else{
 			 	//no match-check for connecting flights
