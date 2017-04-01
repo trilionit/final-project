@@ -110,11 +110,7 @@ router.post("/flights/search", function(req, res){
 							id:matchedArray[i].airlineId
 						}
 					}).then(function(m){
-						console.log("////////////////////////////");
-						console.log("matchedDepartures:", matchDeparture);
-						console.log("matchedDestinations:", matchDestination);
-						console.log("matchedArray:", matchedArray);
-						
+											
 						for(var i=0; i <m.length; i ++){
 
 							let data={
