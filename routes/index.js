@@ -55,48 +55,17 @@ router.post("/flights/search", function(req, res){
 		}).then(function(matched){
 			if(matched.length !=0){
 				let newFare;
-				let matchedArray=[];
 				let data;
 				let adultPax=parseInt(userData.adultPax);
 				let childPax=parseInt(userData.childPax);
 				let TotalPax= (adultPax + childPax);
-				
-				for(var i=0; i< matched.length; i++){
-					newFare = (TotalPax * matched[i].fare);
-					models.airlines.findAll({
-						where:{
-							id:matched[i].airlineId
-						}
-					}).then(function(airlines){
-						console.log("airlines length in db", airlines.length);
-						// data={
-						// 	id:matched[i].airlineId,
-						// 	departure:departAirport,
-						// 	destination:arriveAirport,
-						// 	airline:airlines[0].name,
-						// 	flightNumber:matched[i].flightNumber,
-						// 	imgUrl:airlines[0].imgUrl,
-						// 	departTime:"10:00am",
-						// 	arriveTime:"2:35pm",
-						// 	flightTime:"2h:30min",
-						// 	adultPax:userData.adultPax,
-						// 	childPax:userData.childPax,
-						// 	fare:newFare,
-						// 	stops:0
-						// }
-						// matchedArray.push(matchedObject);
-						// console.log("Matched Array: ", matchedArray.length);
-					});
-					
-						
-					
+				console.log("Matched Destinations ",matched.length);
+				for(var i=0; i<matched.length; i++){
+					console.log("Airline: ", matched[i].airlineId);
 				}
-			 	console.log("Matched Object: ", matched.length);
 
-
-				
-				
-				
+			}else{
+				//no match-check for connecting flights
 			}
 			
 		})
