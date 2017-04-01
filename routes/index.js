@@ -89,6 +89,11 @@ router.post("/flights/search", function(req, res){
 					let fare=parseInt(matched[i].fare);
 					newFare=(fare + TotalPax);
 					//get disyances between airports
+						let lon1=matchDeparture[0].longitude;
+						let lat1=matchDeparture[0].latitude;
+						let lon2=matchDestination[0].longitude;
+						let lat2=matchDestination[0].latitude;
+					let distance= getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2);
 					data={
 						airlineId:matched[i].airlineId,
 						flightNumber:matched[i].flightNumber,
