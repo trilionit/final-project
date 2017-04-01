@@ -55,18 +55,38 @@ router.post("/flights/search", function(req, res){
 		}).then(function(matched){
 			if(matched.length !=0){
 				let newFare;
+				let matchedArray=[];
 				let data;
 				let adultPax=parseInt(userData.adultPax);
 				let childPax=parseInt(userData.childPax);
 				let TotalPax= (adultPax + childPax);
+				console.log("Total Pax: ",TotalPax);
 				console.log("Matched Destinations ",matched.length);
 				for(var i=0; i<matched.length; i++){
-					console.log("Airline: ", matched[i].airlineId);
+					//console.log("Airline: ", matched[i].airlineId);
+					let fare=parseInt(matched[i].fare);
+					newFare=(fare + TotalPax);
+					data={
+						airlineId:matched[i].airlineId,
+						flightNumber:matched[i].flightNumber,
+						fare:newFare
+					}
+					matchedArray.push(data);
 				}
-
-			}else{
-				//no match-check for connecting flights
-			}
+				for(var i=0; i <matchedArray.length; i++){
+					// let airlineId=matchedArray[i].airlineId;
+					models.airlines.findAll({
+						where:{
+							id:matchedArray[i].airlineId
+						}
+					}).then(function(m){
+						console.log(m.length);
+					})
+				}
+			 }
+			// else{
+			 	//no match-check for connecting flights
+			// }
 			
 		})
 	});
