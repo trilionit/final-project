@@ -88,7 +88,7 @@ router.post("/flights/search", function(req, res){
 					//console.log("Airline: ", matched[i].airlineId);
 					let fare=parseInt(matched[i].fare);
 					newFare=(fare + TotalPax);
-
+					//get disyances between airports
 					data={
 						airlineId:matched[i].airlineId,
 						flightNumber:matched[i].flightNumber,
