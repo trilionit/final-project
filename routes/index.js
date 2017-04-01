@@ -12,13 +12,34 @@ router.post("/flights/search", function(req, res){
 	// let userDepart=userData.departure;
 	// let userArrive=userData.destination;
 	const AirportArray=[];
+	//http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+		var R = 6371; // Radius of the earth in km
+		var dLat = deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = deg2rad(lon2-lon1); 
+		var a = 
+		Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+		Math.sin(dLon/2) * Math.sin(dLon/2)
+		; 
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		var d = R * c; // Distance in km
+	  	return d;
+	}
+
+	function deg2rad(deg) {
+	  return deg * (Math.PI/180)
+	}
+
 	models.airports.findAll().then(function(Airports){
 		//console.log(depart.name);
 		for (var i=0; i <Airports.length; i++){
 			let airportObject={
 				id:Airports[i].id,
 				iata:Airports[i].iata.toLowerCase(),
-				AirportName:Airports[i].name.toLowerCase()
+				AirportName:Airports[i].name.toLowerCase(),
+				longitude:Airports[i].longitude,
+				latitude:Airports[i].latitude
 			}
 			AirportArray.push(airportObject);
 
@@ -67,6 +88,7 @@ router.post("/flights/search", function(req, res){
 					//console.log("Airline: ", matched[i].airlineId);
 					let fare=parseInt(matched[i].fare);
 					newFare=(fare + TotalPax);
+
 					data={
 						airlineId:matched[i].airlineId,
 						flightNumber:matched[i].flightNumber,
@@ -81,8 +103,13 @@ router.post("/flights/search", function(req, res){
 							id:matchedArray[i].airlineId
 						}
 					}).then(function(m){
+						console.log("////////////////////////////");
+						console.log("matchedDepartures:", matchDeparture);
+						console.log("matchedDestinations:", matchDestination);
+						console.log("matchedArray:", matchedArray);
 						
 						for(var i=0; i <m.length; i ++){
+
 							let data={
 								airlineId:m[i].id,
 								airline:m[i].name,
@@ -91,13 +118,10 @@ router.post("/flights/search", function(req, res){
 							}
 							newArr.push(data);
 						}
+						console.log("NewArray:", newArr);
 						//console.log("NA:",newArr);
 						console.log("///////////////////////////");
-				console.log("matchedDepartures:", matchDeparture);
-				console.log("matchedDestinations:", matchDestination);
-				console.log("////////////////////////////");
-				console.log("matchedArray:", matchedArray);
-				console.log("NewArray:", newArr);
+				
 					})
 				}
 				
