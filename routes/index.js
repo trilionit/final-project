@@ -80,7 +80,21 @@ router.post("/flights/search", function(req, res){
 							id:matchedArray[i].airlineId
 						}
 					}).then(function(m){
-						console.log(m.length);
+						let newArr=[];
+						for(var i=0; i <m.length; i ++){
+							data={
+								airlineId:m[i].id,
+								airline:m[i].name,
+								flightNumber:matchedArray[i].flightNumber,
+								imgUrl:m[i].imgUrl,
+								adultPax:adultPax,
+								childPax:childPax,
+								fare:matchedArray[i].fare,
+								stops:0
+							}
+							newArr.push(data);
+						}
+						console.log(newArr);
 					})
 				}
 			 }
