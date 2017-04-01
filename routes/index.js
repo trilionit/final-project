@@ -89,15 +89,17 @@ router.post("/flights/search", function(req, res){
 					let fare=parseInt(matched[i].fare);
 					newFare=(fare + TotalPax);
 					//get disyances between airports
-						let lon1=matchDeparture[0].longitude;
-						let lat1=matchDeparture[0].latitude;
-						let lon2=matchDestination[0].longitude;
-						let lat2=matchDestination[0].latitude;
+						let lon1=parseInt(matchDeparture[0].longitude);
+						let lat1=parseInt(matchDeparture[0].latitude);
+						let lon2=parseInt(matchDestination[0].longitude);
+						let lat2=parseInt(matchDestination[0].latitude);
 					let distance= getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2);
+					
 					data={
 						airlineId:matched[i].airlineId,
 						flightNumber:matched[i].flightNumber,
-						fare:newFare
+						fare:newFare,
+						distance:distance
 					}
 					matchedArray.push(data);
 				}
@@ -116,9 +118,16 @@ router.post("/flights/search", function(req, res){
 						for(var i=0; i <m.length; i ++){
 
 							let data={
-								airlineId:m[i].id,
+								id:m[i].id,
+								departure:matchDeparture[0].AirportName,
+								destination:matchDestination[0].AirportName,
 								airline:m[i].name,
+								flightNumber:matchedArray[i].flightNumber,
 								imgUrl:m[i].imgUrl,
+								adultPax:adultPax,
+								childPax:childPax,
+								fare:matchedArray[i].fare,
+								distance:matchedArray[i].distance,
 								stops:0
 							}
 							newArr.push(data);
