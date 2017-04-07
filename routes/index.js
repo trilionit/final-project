@@ -128,17 +128,12 @@ router.post("/flights/search", function(req, res){
 							newArr.push(data);
 						}
 						console.log("NewArray:", newArr);
+						res.send(newArr);
 						//console.log("NA:",newArr);
 						console.log("///////////////////////////");
 				
 					})
 				}
-				
-
-
-
-
-
 			 }
 			else{
 			 	//no match-check for connecting flights
