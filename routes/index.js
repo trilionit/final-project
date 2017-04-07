@@ -9,9 +9,8 @@ router.post("/flights/search", function(req, res){
 	let userData=req.body;
 	let userDepart =userData.departure.toLowerCase();	
 	let userArrive= userData.destination.toLowerCase();
-	// let userDepart=userData.departure;
-	// let userArrive=userData.destination;
 	const AirportArray=[];
+	//thanks to
 	//http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 		var R = 6371; // Radius of the earth in km
@@ -32,7 +31,7 @@ router.post("/flights/search", function(req, res){
 	}
 
 	models.airports.findAll().then(function(Airports){
-		//console.log(depart.name);
+		//Find all airports matching query
 		for (var i=0; i <Airports.length; i++){
 			let airportObject={
 				id:Airports[i].id,
@@ -85,7 +84,7 @@ router.post("/flights/search", function(req, res){
 				console.log("Total Pax: ",TotalPax);
 				console.log("Matched Destinations ",matched.length);
 				for(var i=0; i<matched.length; i++){
-					//console.log("Airline: ", matched[i].airlineId);
+					
 					let fare=parseInt(matched[i].fare);
 					newFare=(fare + TotalPax);
 					//get disyances between airports
@@ -141,9 +140,18 @@ router.post("/flights/search", function(req, res){
 
 
 			 }
-			// else{
+			else{
 			 	//no match-check for connecting flights
-			// }
+			 	models.destinations.findAll({
+					where:{
+						 arriveAirportId:arriveId
+					}
+				}).then(function(matched){
+					//if matched do all of the above
+					console.log("matched", matched);
+
+				})
+			}
 			
 		})
 	});
