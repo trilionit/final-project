@@ -33,19 +33,35 @@ router.post("/add/airlines", function(req, res){
 
 });
 //route for adding destinations
-router.get("/add/destinations/depart/:depart/arrive/:arrive/airline/:airline/flightNumber/:flightNumber/fare/:fare", function(req, res){
-	let departId=req.params.depart;
-	let arriveId=req.params.arrive;
-	let airlineId=req.params.airline;
+router.get("depart/:depart/arrive/:arrive/airline/:airline/flightNumber/:flightNumber/fare/:fare/iata/:iata/departTime/:departTime/arriveTime/:arriveTime/imgUrl/:imgUrl/departLong/:departLong/departLat/:departLat/arriveLong/:arriveLong/arriveLat/:arriveLat", function(req, res){
+	let departAirport=req.params.depart;
+	let arriveAirport=req.params.arrive;
+	let airline=req.params.airline;
 	let flightNumber=req.params.flightNumber;
+	let iata=req.params.iata;
+	let imgUrl=req.params.imgUrl;
+	let departTime=req.params.departTime;
+	let arriveTime=req.params.arriveTime;
 	let fare=req.params.fare;
+	let departLong=req.params.departLong;
+	let departLat=req.params.departLat;
+	let arriveLong=req.params.arriveLong;
+	let arriveLat=req.params.arriveLat;
 
 	models.destinations.create({
-		departAirportId:departId,
-		arriveAirportId:arriveId,
-		airlineId:airlineId,
+		departAirport:departId,
+		arriveAirport:arriveId,
+		airline:airlineId,
 		flightNumber:flightNumber,
-		fare:fare
+		fare:fare,
+		departTime:departTime,
+		arriveTime:arriveTime,
+		imgUrl:imgUrl,
+		iata:iata,
+		departLongitude:departLong,
+		departLatitude:departLat,
+		arriveLongitude:arriveLong,
+		arriveLatitude:arriveLat
 	}).then(function(send){
 		res.send(send);
 	});
