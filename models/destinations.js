@@ -6,10 +6,15 @@ module.exports = function(sequelize, DataTypes) {
     airlineId:DataTypes.STRING,
     flightNumber:DataTypes.STRING,
     imgUrl:DataTypes.STRING,
-    iata:DataTypes.STRING,
     departTime:DataTypes.STRING,
     arriveTime:DataTypes.STRING,
-    fare: DataTypes.STRING
+    fare: DataTypes.STRING,
+    departIATA:DataTypes.STRING,
+    arriveIATA:DataTypes.STRING,
+    departLongitude:DataTypes.STRING,
+    departLatitude:DataTypes.STRING,
+    arriveLongitude:DataTypes.STRING,
+    arriveLatitude:DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

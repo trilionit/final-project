@@ -33,12 +33,13 @@ router.post("/add/airlines", function(req, res){
 
 });
 //route for adding destinations
-router.get("depart/:depart/arrive/:arrive/airline/:airline/flightNumber/:flightNumber/fare/:fare/iata/:iata/departTime/:departTime/arriveTime/:arriveTime/imgUrl/:imgUrl/departLong/:departLong/departLat/:departLat/arriveLong/:arriveLong/arriveLat/:arriveLat", function(req, res){
+router.get("depart/:depart/arrive/:arrive/airline/:airline/flightNumber/:flightNumber/fare/:fare/departIATA/:departIATA/arriveIATA/:arriveIATA/departTime/:departTime/arriveTime/:arriveTime/imgUrl/:imgUrl/departLong/:departLong/departLat/:departLat/arriveLong/:arriveLong/arriveLat/:arriveLat", function(req, res){
 	let departAirport=req.params.depart;
 	let arriveAirport=req.params.arrive;
 	let airline=req.params.airline;
 	let flightNumber=req.params.flightNumber;
-	let iata=req.params.iata;
+	let departIATA=req.params.departIATA;
+	let arriveIATA=req.params.arriveIATA
 	let imgUrl=req.params.imgUrl;
 	let departTime=req.params.departTime;
 	let arriveTime=req.params.arriveTime;
@@ -57,7 +58,8 @@ router.get("depart/:depart/arrive/:arrive/airline/:airline/flightNumber/:flightN
 		departTime:departTime,
 		arriveTime:arriveTime,
 		imgUrl:imgUrl,
-		iata:iata,
+		departIATA:departIATA,
+		arriveIATA:arriveIATA,
 		departLongitude:departLong,
 		departLatitude:departLat,
 		arriveLongitude:arriveLong,
