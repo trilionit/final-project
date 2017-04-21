@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var destinations = sequelize.define('destinations', {
     departAirport: DataTypes.STRING,
     arriveAirport: DataTypes.STRING,
-    airlineId:DataTypes.STRING,
+    airline:DataTypes.STRING,
     flightNumber:DataTypes.STRING,
     imgUrl:DataTypes.STRING,
     departTime:DataTypes.STRING,
