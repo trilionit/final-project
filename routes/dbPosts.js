@@ -34,9 +34,9 @@ router.post("/add/airlines", function(req, res){
 });
 //route for adding destinations
 //router.get("add/destinations/depart/:depart/arrive/:arrive/airline/:airline/flightNumber/:flightNumber/fare/:fare/departIATA/:departIATA/arriveIATA/:arriveIATA/departTime/:departTime/arriveTime/:arriveTime/imgUrl/:imgUrl/departLong/:departLong/departLat/:departLat/arriveLong/:arriveLong/arriveLat/:arriveLat", function(req, res){
-router.post("add/destinations", function(req, res){
-	let departAirport=req.body.depart;
-	let arriveAirport=req.body.arrive;
+router.post("/add/destinations", function(req, res){
+	let departAirport=req.body.departAirport;
+	let arriveAirport=req.body.arriveAirport;
 	let airline=req.body.airline;
 	let flightNumber=req.body.flightNumber;
 	let departIATA=req.body.departIATA;
@@ -45,15 +45,15 @@ router.post("add/destinations", function(req, res){
 	let departTime=req.body.departTime;
 	let arriveTime=req.body.arriveTime;
 	let fare=req.body.fare;
-	let departLong=req.body.departLong;
-	let departLat=req.body.departLat;
-	let arriveLong=req.body.arriveLong;
-	let arriveLat=req.body.arriveLat;
+	let departLong=req.body.departLongitude;
+	let departLat=req.body.departLatitude;
+	let arriveLong=req.body.arriveLongitude;
+	let arriveLat=req.body.arriveLatitude;
 
 	models.destinations.create({
-		departAirport:departId,
-		arriveAirport:arriveId,
-		airline:airlineId,
+		departAirport:departAirport,
+		arriveAirport:arriveAirport,
+		airline:airline,
 		flightNumber:flightNumber,
 		fare:fare,
 		departTime:departTime,
@@ -65,9 +65,24 @@ router.post("add/destinations", function(req, res){
 		departLatitude:departLat,
 		arriveLongitude:arriveLong,
 		arriveLatitude:arriveLat
-	}).then(function(send){
-		res.send(send);
-	});
+	})
+	let data={
+		departAirport:departAirport,
+		arriveAirport:arriveAirport,
+		airline:airline,
+		flightNumber:flightNumber,
+		fare:fare,
+		departTime:departTime,
+		arriveTime:arriveTime,
+		imgUrl:imgUrl,
+		departIATA:departIATA,
+		arriveIATA:arriveIATA,
+		departLongitude:departLong,
+		departLatitude:departLat,
+		arriveLongitude:arriveLong,
+		arriveLatitude:arriveLat
+	}
+		res.json(data);
 });
 
 //route for mapping Airlines to airports
