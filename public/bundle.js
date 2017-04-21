@@ -44759,13 +44759,117 @@
 		}
 	
 		_createClass(Destinations, [{
+			key: 'handleDepartAirport',
+			value: function handleDepartAirport(event) {
+				this.setState({
+					departAirport: event.target.value
+				});
+			}
+		}, {
+			key: 'handleDepartIATA',
+			value: function handleDepartIATA(event) {
+				this.setState({
+					departIATA: event.target.value
+				});
+			}
+		}, {
+			key: 'handleDepartLong',
+			value: function handleDepartLong(event) {
+				this.setState({
+					departLongitude: event.target.value
+				});
+			}
+		}, {
+			key: 'handleDepartLat',
+			value: function handleDepartLat(event) {
+				this.setState({
+					departLatitude: event.target.value
+				});
+			}
+		}, {
+			key: 'handleArriveAirport',
+			value: function handleArriveAirport(event) {
+				this.setState({
+					arriveAirport: event.target.value
+				});
+			}
+		}, {
+			key: 'handleArriveIATA',
+			value: function handleArriveIATA(event) {
+				this.setState({
+					arriveIATA: event.target.value
+				});
+			}
+		}, {
+			key: 'handleArriveLong',
+			value: function handleArriveLong(event) {
+				this.setState({
+					arriveLongitude: event.target.value
+				});
+			}
+		}, {
+			key: 'handleArriveLat',
+			value: function handleArriveLat(event) {
+				this.setState({
+					arriveLatitude: event.target.value
+				});
+			}
+		}, {
+			key: 'handleAdultPax',
+			value: function handleAdultPax(event) {
+				this.setState({
+					adultPax: event.target.value
+				});
+				console.log(this.state.adultPax);
+			}
+		}, {
+			key: 'handleAirline',
+			value: function handleAirline(event) {
+				this.setState({
+					airline: event.target.value
+				});
+			}
+		}, {
+			key: 'handleFlightNumber',
+			value: function handleFlightNumber(event) {
+				this.setState({
+					flightNumber: event.target.value
+				});
+			}
+		}, {
+			key: 'handleImgUrl',
+			value: function handleImgUrl(event) {
+				this.setState({
+					imgUrl: event.target.value
+				});
+			}
+		}, {
+			key: 'handleDepartTime',
+			value: function handleDepartTime(event) {
+				this.setState({
+					departTime: event.target.value
+				});
+			}
+		}, {
+			key: 'handleArriveTime',
+			value: function handleArriveTime(event) {
+				this.setState({
+					arriveTime: event.target.value
+				});
+			}
+		}, {
+			key: 'handleFare',
+			value: function handleFare(event) {
+				this.setState({
+					fare: event.target.value
+				});
+			}
+		}, {
 			key: 'handleSubmit',
 			value: function handleSubmit(event) {
-				var _this2 = this;
-	
 				event.preventDefault();
 				axios.post('/add/destinations', this.state).then(function (response) {
-					_this2.props.setQueryResults(response.data);
+					console.log(response.data);
 				});
 			}
 		}, {
@@ -44794,85 +44898,85 @@
 									{ htmlFor: 'departure' },
 									'Departing Airport'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'departure' }),
+								_react2.default.createElement('input', { type: 'text', name: 'departure', onChange: this.handleDepartAirport.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'departIATA' },
 									'Departing Airport IATA CODE'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'departIATA' }),
+								_react2.default.createElement('input', { type: 'text', name: 'departIATA', onChange: this.handleDepartIATA.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'departLong' },
 									'Depart Airport Longitude'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'departLong' }),
+								_react2.default.createElement('input', { type: 'text', name: 'departLong', onChange: this.handleDepartLong.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'departLat' },
 									'Depart Airport Latitude'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'departLat' }),
+								_react2.default.createElement('input', { type: 'text', name: 'departLat', onChange: this.handleDepartLat.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'destination' },
 									'Arriving Airport'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'destination' }),
+								_react2.default.createElement('input', { type: 'text', name: 'destination', onChange: this.handleArriveAirport.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'arriveIATA' },
 									'Arriving Airport IATA CODE'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'arriveIATA' }),
+								_react2.default.createElement('input', { type: 'text', name: 'arriveIATA', onChange: this.handleArriveIATA.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'arriveLong' },
 									'Arriving Airport Longitude'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'arriveLong' }),
+								_react2.default.createElement('input', { type: 'text', name: 'arriveLong', onChange: this.handleArriveLong.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'departLat' },
 									'Arriving Airport Latitude'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'arriveLat' }),
+								_react2.default.createElement('input', { type: 'text', name: 'arriveLat', onChange: this.handleArriveLat.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'airline' },
 									'Airline'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'airline' }),
+								_react2.default.createElement('input', { type: 'text', name: 'airline', onChange: this.handleAirline.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'flightNumber' },
 									'Flight Number'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'flightNumber' }),
+								_react2.default.createElement('input', { type: 'text', name: 'flightNumber', onChange: this.handleFlightNumber.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'imgUrl' },
 									'Airline Logo'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'imgUrl' }),
+								_react2.default.createElement('input', { type: 'text', name: 'imgUrl', onChange: this.handleImgUrl.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'departTime' },
 									'Departure Time'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'departTime' }),
+								_react2.default.createElement('input', { type: 'text', name: 'departTime', onChange: this.handleDepartTime.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'arrivalTime' },
 									'Arrival Time'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'arrivalTime' }),
+								_react2.default.createElement('input', { type: 'text', name: 'arrivalTime', onChange: this.handleArriveTime.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'fare' },
 									'Fare'
 								),
-								_react2.default.createElement('input', { type: 'text', name: 'fare' }),
+								_react2.default.createElement('input', { type: 'text', name: 'fare', onChange: this.handleFare.bind(this) }),
 								_react2.default.createElement(
 									'label',
 									{ htmlFor: 'submit', className: 'responsive-label' },
