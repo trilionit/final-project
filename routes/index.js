@@ -30,7 +30,7 @@ router.post("/flights/search", function(req, res){
 	  return deg * (Math.PI/180)
 	}
 
-	models.airports.findAll().then(function(Airports){
+	models.destinations.findAll().then(function(Destinations){
 		//Find all airports matching query
 		for (var i=0; i <Airports.length; i++){
 			let airportObject={
