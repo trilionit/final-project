@@ -9,7 +9,6 @@ router.post("/flights/search", function(req, res){
 	let userData=req.body;
 	let userDepart =userData.departure.toLowerCase();	
 	let userArrive= userData.destination.toLowerCase();
-	const AirportArray=[];
 	//thanks to
 	//http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 	function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -32,123 +31,132 @@ router.post("/flights/search", function(req, res){
 
 	models.destinations.findAll().then(function(Destinations){
 		//Find all airports matching query
-		for (var i=0; i <Airports.length; i++){
-			let airportObject={
-				id:Airports[i].id,
-				iata:Airports[i].iata.toLowerCase(),
-				AirportName:Airports[i].name.toLowerCase(),
-				longitude:Airports[i].longitude,
-				latitude:Airports[i].latitude
+		let DestinationsArray=[];
+		for (var i=0; i <Destinations.length; i++){
+			let destinationsObject={
+				id:Destinations[i].id,
+				departIATA:Destinations[i].departIATA.toLowerCase(),
+				arriveIATA:Destinations[i].arriveIATA.toLowerCase(),
+				departAirport:Destinations[i].departAirport.toLowerCase(),
+				arriveAirport:Destinations[i].arriveAirport.toLowerCase(),
+			    airline:Destinations[i].airline,
+			    flightNumber:Destinations[i].flightNumber,
+			    imgUrl:Destinations[i].imgUrl,
+			    departTime:Destinations[i].departTime,
+			    arriveTime:Destinations[i].arriveTime,
+			    fare: Destinations[i].fare,
+			    departLongitude:Destinations[i].departLongitude,
+			    departLatitude:Destinations[i].departLatitude,
+			    arriveLongitude:Destinations[i].arriveLongitude,
+			    arriveLatitude:Destinations[i].arriveLatitude
 			}
-			AirportArray.push(airportObject);
+			DestinationsArray.push(destinationsObject);
 
 		}
-	let matchDeparture= AirportArray.filter(function(search){
-		let dep=search.AirportName.toLowerCase();
-		let iata=search.iata.toLowerCase();
-		if(dep.includes(userDepart) ==true || iata.includes(userDepart) ==true){
-			return search;
-		}
-	});
-
-	let matchDestination= AirportArray.filter(function(search){
-	let dest=search.AirportName.toLowerCase();
-	let iata=search.iata.toLowerCase();
-		if(dest.includes(userArrive)==true || iata.includes(userArrive)==true){
-			return search;
-		}
-	});
-	
-	let departId= matchDeparture[0].id;	
-	let arriveId=  matchDestination[0].id;
-	let departAirport=matchDeparture[0].airportName;
-	let arriveAirport=matchDestination[0].airportName;
-	console.log("Airports:", AirportArray);
-	console.log("Depart ID:",departId);
-	console.log("Arrive ID:",arriveId);
-
-		models.destinations.findAll({
-			where:{
-				departAirportId:departId,
-				 arriveAirportId:arriveId
+		let matchedDepAndDest= DestinationsArray.filter(function(search){
+		let dep=search.departAirport.toLowerCase();
+		let dest=search.arriveAirport.toLowerCase();
+			if(dep.includes(userDepart)==true && dest.includes(userArrive)==true){
+				return search;
 			}
-		}).then(function(matched){
-			if(matched.length !=0){
-				let newFare;
-				let matchedArray=[];
-				let newArr=[];
-				let data;
-				let adultPax=parseInt(userData.adultPax);
-				let childPax=parseInt(userData.childPax);
-				let TotalPax= (adultPax + childPax);
-				console.log("Total Pax: ",TotalPax);
-				console.log("Matched Destinations ",matched.length);
-				for(var i=0; i<matched.length; i++){
-					
-					let fare=parseInt(matched[i].fare);
-					newFare=(fare + TotalPax);
-					//get disyances between airports
-						let lon1=parseInt(matchDeparture[0].longitude);
-						let lat1=parseInt(matchDeparture[0].latitude);
-						let lon2=parseInt(matchDestination[0].longitude);
-						let lat2=parseInt(matchDestination[0].latitude);
-					let distance= getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2);
-					
-					data={
-						airlineId:matched[i].airlineId,
-						flightNumber:matched[i].flightNumber,
-						fare:newFare,
-						distance:distance
-					}
-					matchedArray.push(data);
-				}
-				for(var i=0; i <matchedArray.length; i++){
-					// let airlineId=matchedArray[i].airlineId;
-					models.airlines.findAll({
-						where:{
-							id:matchedArray[i].airlineId
-						}
-					}).then(function(m){
-											
-						for(var i=0; i <m.length; i ++){
-
-							let data={
-								id:m[i].id,
-								departure:matchDeparture[0].AirportName,
-								destination:matchDestination[0].AirportName,
-								airline:m[i].name,
-								flightNumber:matchedArray[i].flightNumber,
-								imgUrl:m[i].imgUrl,
-								adultPax:adultPax,
-								childPax:childPax,
-								fare:matchedArray[i].fare,
-								distance:matchedArray[i].distance,
-								stops:0
-							}
-							newArr.push(data);
-						}
-						console.log("NewArray:", newArr);
-						res.send(newArr);
-						//console.log("NA:",newArr);
-						console.log("///////////////////////////");
-				
-					})
-				}
-			 }
-			else{
-			 	//no match-check for connecting flights
-			 	models.destinations.findAll({
-					where:{
-						 arriveAirportId:arriveId
-					}
-				}).then(function(matched){
-					//if matched do all of the above
-					console.log("matched", matched);
-
-				})
-			}
-			
 		})
+		let matchDeparture= DestinationsArray.filter(function(search){
+		let dep=search.departAirport.toLowerCase();
+		let departIATA=search.departIATA.toLowerCase();
+			if(dep.includes(userDepart) ==true || departIATA.includes(userDepart) ==true){
+				return search;
+			}
+		});
+
+		let matchDestination= DestinationsArray.filter(function(search){
+		let dest=search.arriveAirport.toLowerCase();
+		let arriveIATA=search.arriveIATA.toLowerCase();
+			if(dest.includes(userArrive)==true || arriveIATA.includes(userArrive)==true){
+				return search;
+			}
+		});
+		
+		// let departId= matchDeparture[0].id;	
+		// let arriveId=  matchDestination[0].id;
+		// let departAirport=matchDeparture[0].airportName;
+		// let arriveAirport=matchDestination[0].airportName;
+		// console.log("////////////////////////");
+		// console.log("matchDeparture:", matchDeparture);
+		let newResults=[];
+		let data;
+		let adultPax=parseInt(userData.adultPax);
+		let childPax=parseInt(userData.childPax);
+		let TotalPax= (adultPax + childPax);
+		let newFare;
+		
+		let totalDuration;
+		let min;
+		let hours;
+		let flightDuration;
+		if(matchedDepAndDest.length !=0){
+		for(var i=0; i< matchedDepAndDest.length; i++){
+			//totalDuration = parseInt(matchedDepAndDest[i].flightTime);
+			//min = totalDuration % 60;
+			//hours = (totalDuration -min)/60;
+			//flightDuration = (hours + "hrs:"+ min + "mins");
+
+			newFare = (TotalPax * matchedDepAndDest[i].fare);
+			data={
+				id:matchedDepAndDest[i].id,
+				departAirport:matchedDepAndDest[i].departAirport.toLowerCase(),
+				arriveAirport:matchedDepAndDest[i].arriveAirport.toLowerCase(),
+			    airline:matchedDepAndDest[i].airline,
+			    flightNumber:matchedDepAndDest[i].flightNumber,
+			    imgUrl:matchedDepAndDest[i].imgUrl,
+			    departTime:matchedDepAndDest[i].departTime,
+			    arriveTime:matchedDepAndDest[i].arriveTime,
+				adultPax:userData.adultPax,
+				childPax:userData.childPax,
+				fare:newFare,
+				stops:0
+			}
+			newResults.push(data);
+		}
+		console.log(newResults);
+	// 	res.json(newResults);
+		}else if(matchDeparture.length !=0 && matchDestination.length !=0){
+		console.log("Connecting Flight");
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+		for(var i=0; i< matchDeparture.length; i++){
+			newFare = parseInt((TotalPax)*(matchDeparture[i].fare + matchDestination[0].fare));
+			totalDuration = parseInt(matchDeparture[i].flightTime);
+			min = totalDuration % 60;
+			hours = (totalDuration -min)/60;
+
+			flightDuration = (hours + "hrs:"+ min + "mins");
+				data ={
+					id:matchDeparture[i].id,
+					departAirport:matchDeparture[i].departAirport.toLowerCase(),
+					arriveAirport:matchDestination[i].arriveAirport.toLowerCase(),
+				    departTime:matchDeparture[i].departTime,
+				    arriveTime:matchDestination[i].arriveTime,
+					airline:matchDeparture[i].airline,
+					// flightNumber: matchDeparture[i].flightNumber + " - " + matchedDestinations[i].flightNumber,
+					flightNumber: matchDeparture[i].flightNumber,
+					imgUrl:matchDeparture[i].imgUrl,
+					departTime:matchDeparture[i].departTime,
+					arriveTime:matchDeparture[i].arriveTime,
+					adultPax:userData.adultPax,
+					flightTime:flightDuration,
+					childPax:userData.childPax,
+					fare:newFare,
+					stops:1
+				}
+		}
+		newResults.push(data);
+		console.log(newResults);
+	// 	res.json(newResults);
+
+		}
+
+
+			
 	});
 	
 	
